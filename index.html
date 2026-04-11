@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TecniBaby | Limpieza Premium</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@900&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root { --brand:#FA008A; }
+
+body{
+background:#050505;
+color:white;
+font-family:'Plus Jakarta Sans',sans-serif;
+overflow-x:hidden;
+}
+
+/* TITULOS */
+.title{
+font-family:'Outfit',sans-serif;
+font-weight:900;
+font-style:italic;
+}
+
+/* NAV */
+.glass{
+background:rgba(15,15,15,0.6);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+/* HERO */
+.hero{
+min-height:100vh;
+background-image:linear-gradient(to bottom, rgba(0,0,0,0.3), #050505),
+url('Coches de bebe.jpg');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+}
+
+/* CARDS */
+.card{
+transition:.4s;
+border:1px solid rgba(255,255,255,0.05);
+}
+.card:hover{
+transform:translateY(-10px);
+border-color:var(--brand);
+box-shadow:0 20px 40px rgba(250,0,138,0.25);
+}
+
+/* BOTON */
+.btn{
+background:var(--brand);
+transition:.3s;
+}
+.btn:hover{
+background:#d00073;
+transform:scale(1.05);
+}
+
+/* ANIMACION */
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+transition:all 1s ease;
+}
+.fade-up.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+width:60px;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:28px;
+color:white;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+z-index:999;
+transition:.3s;
+}
+.whatsapp:hover{
+transform:scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="fixed w-full z-50 glass px-6 py-4">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+
+<div class="flex items-center gap-3">
+<img src="logo.png" class="h-10">
+<span class="title text-xl uppercase">TecniBaby</span>
+</div>
+
+<a href="https://wa.me/573172244861" target="_blank"
+class="btn px-6 py-2 rounded-full text-xs font-bold uppercase">
+Agendar
+</a>
+
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+<div class="max-w-7xl mx-auto px-6 fade-up">
+
+<h1 class="title text-6xl md:text-8xl leading-[0.8] uppercase mb-6">
+Limpieza<br>
+<span style="color:#FA008A;">Premium</span>
+</h1>
+
+<p class="text-gray-300 max-w-xl text-lg border-l-4 pl-6"
+style="border-color:#FA008A;">
+Desinfección profunda de coches de bebé.
+Eliminamos bacterias, ácaros y suciedad invisible.
+<span class="block mt-2 text-white font-bold">
+Su seguridad es lo primero.
+</span>
+</p>
+
+<div class="mt-10 flex gap-4">
+<a href="https://wa.me/573172244861"
+class="bg-white text-black px-8 py-4 rounded-xl text-xs font-bold uppercase">
+Agendar ahora
+</a>
+
+<a href="#servicios"
+class="border border-white/20 px-8 py-4 rounded-xl text-xs font-bold uppercase">
+Ver servicios
+</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="py-28 px-6">
+
+<div class="max-w-7xl mx-auto">
+
+<h2 class="title text-5xl mb-16 uppercase fade-up">
+Servicios <span style="color:#FA008A;">Premium</span>
+</h2>
+
+<div class="grid md:grid-cols-4 gap-6">
+
+<div class="card p-8 rounded-3xl fade-up">
+<i class="fa-solid fa-baby text-3xl mb-6" style="color:#FA008A;"></i>
+<h3 class="title text-lg mb-3">Desinfección</h3>
+<p class="text-gray-400 text-sm">
+Eliminación total de bacterias y virus.
+</p>
+</div>
+
+<div class="card p-8 rounded-3xl fade-up">
+<i class="fa-solid fa-wind text-3xl mb-6" style="color:#FA008A;"></i>
+<h3 class="title text-lg mb-3">Ácaros</h3>
+<p class="text-gray-400 text-sm">
+Protección contra alergias.
+</p>
+</div>
+
+<div class="card p-8 rounded-3xl fade-up">
+<i class="fa-solid fa-soap text-3xl mb-6" style="color:#FA008A;"></i>
+<h3 class="title text-lg mb-3">Limpieza Profunda</h3>
+<p class="text-gray-400 text-sm">
+Como nuevo.
+</p>
+</div>
+
+<div class="card p-8 rounded-3xl fade-up">
+<i class="fa-solid fa-star text-3xl mb-6" style="color:#FA008A;"></i>
+<h3 class="title text-lg mb-3">Restauración</h3>
+<p class="text-gray-400 text-sm">
+Renovación total.
+</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- INFO GRID -->
+<section class="py-24 bg-zinc-950 text-center">
+
+<div class="max-w-5xl mx-auto grid md:grid-cols-4 gap-6">
+
+<div class="fade-up">
+<h3 class="title text-3xl">24H</h3>
+<p class="text-gray-400 text-sm">Entrega rápida</p>
+</div>
+
+<div class="fade-up">
+<h3 class="title text-3xl">100%</h3>
+<p class="text-gray-400 text-sm">Seguro bebé</p>
+</div>
+
+<div class="fade-up">
+<h3 class="title text-3xl">+500</h3>
+<p class="text-gray-400 text-sm">Clientes felices</p>
+</div>
+
+<div class="fade-up">
+<h3 class="title text-3xl">Premium</h3>
+<p class="text-gray-400 text-sm">Productos</p>
+</div>
+
+</div>
+</section>
+
+<!-- CTA -->
+<section class="py-32 text-center fade-up">
+
+<h2 class="title text-5xl mb-6 uppercase">
+Protege a tu bebé hoy
+</h2>
+
+<p class="text-gray-400 mb-10">
+Agenda ahora mismo por WhatsApp
+</p>
+
+<a href="https://wa.me/573172244861"
+class="btn px-10 py-5 rounded-2xl text-xs font-bold uppercase">
+Agendar
+</a>
+
+</section>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/573172244861" class="whatsapp">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- SCRIPT ANIMACION -->
+<script>
+const elements = document.querySelectorAll('.fade-up');
+
+const observer = new IntersectionObserver(entries => {
+entries.forEach(entry => {
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+});
+
+elements.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
