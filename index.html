@@ -16,7 +16,7 @@
 :root{--brand:#FA008A;}
 
 body{
-background:#050505;
+background:#0a0a0a;
 color:white;
 font-family:'Outfit',sans-serif;
 margin:0;
@@ -42,7 +42,7 @@ opacity:0;
 /* HERO */
 .hero{
 height:100vh;
-background:linear-gradient(to bottom, rgba(0,0,0,.5), #050505),
+background:linear-gradient(to bottom, rgba(0,0,0,.3), #0a0a0a),
 url('./coches.jpg');
 background-size:cover;
 background-position:center;
@@ -74,7 +74,7 @@ border-color:var(--brand);
 /* IMAGENES */
 .img-main{
 width:100%;
-height:400px;
+height:500px;
 object-fit:cover;
 }
 
@@ -110,12 +110,44 @@ background:var(--brand);
 padding:10px 15px;
 border-radius:10px;
 font-size:12px;
-animation:pulse 1.5s infinite;
 }
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.1);}
-100%{transform:scale(1);}
+
+/* CONTADOR */
+.live{
+position:fixed;
+top:90px;
+right:20px;
+background:#111;
+padding:8px 12px;
+border-radius:10px;
+font-size:12px;
+border:1px solid rgba(255,255,255,.1);
+}
+
+/* TIMER */
+.timer{
+position:fixed;
+top:140px;
+right:20px;
+background:var(--brand);
+padding:10px 15px;
+border-radius:10px;
+font-size:12px;
+}
+
+/* NOTIF */
+.notif{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#111;
+padding:12px 16px;
+border-radius:10px;
+font-size:13px;
+border:1px solid rgba(255,255,255,.1);
+opacity:0;
+transform:translateY(20px);
+transition:.5s;
 }
 </style>
 </head>
@@ -126,6 +158,18 @@ animation:pulse 1.5s infinite;
 <div class="loader" id="loader">
 <img src="Logo.png" id="logoLoader">
 </div>
+
+<!-- CONTADOR -->
+<div class="live">👁 <span id="viewers">12</span> viendo</div>
+
+<!-- TIMER -->
+<div class="timer">⏳ <span id="timer">05:00</span></div>
+
+<!-- CUPOS -->
+<div class="cupos">🔥 quedan <span id="slots">7</span> cupos</div>
+
+<!-- NOTIF -->
+<div class="notif" id="notif"></div>
 
 <!-- NAV -->
 <nav class="fixed w-full flex justify-between p-6 bg-black/60 z-50">
@@ -159,12 +203,23 @@ animation:pulse 1.5s infinite;
 <section class="py-24 px-6">
 <h2 class="text-4xl text-center mb-10">antes / después</h2>
 
-<div class="compare max-w-3xl mx-auto">
+<div class="compare max-w-4xl mx-auto">
 <img src="antes.png" class="img-main">
 <div class="after" id="after">
 <img src="Despues.png" class="img-main">
 </div>
 <div class="slider" id="slider"></div>
+</div>
+</section>
+
+<!-- VIDEO -->
+<section class="py-24 px-6">
+<h2 class="text-4xl text-center mb-10">mira el proceso</h2>
+
+<div class="max-w-4xl mx-auto">
+<iframe width="100%" height="500"
+src="https://www.youtube.com/embed/Fr3Sr3Uc17I"
+frameborder="0" allowfullscreen></iframe>
 </div>
 </section>
 
@@ -196,12 +251,10 @@ animation:pulse 1.5s infinite;
 ✅ solicitud enviada correctamente
 </div>
 
-<form 
-id="form"
+<form id="form"
 action="https://formspree.io/f/xeevqvnw"
 method="POST"
-class="max-w-md mx-auto relative z-10"
->
+class="max-w-md mx-auto relative z-10">
 
 <input name="nombre" placeholder="nombre" class="input mb-3" required>
 <input name="telefono" placeholder="teléfono" class="input mb-3" required>
@@ -211,9 +264,6 @@ class="max-w-md mx-auto relative z-10"
 </form>
 </section>
 
-<!-- CUPOS -->
-<div class="cupos">🔥 últimos cupos disponibles</div>
-
 <!-- WHATSAPP -->
 <a href="https://wa.me/573172244861" class="whatsapp">💬</a>
 
@@ -222,13 +272,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* LOADER */
 gsap.to("#logoLoader",{opacity:1,scale:1.2,duration:1});
-gsap.to("#loader",{opacity:0,delay:2,duration:1,onComplete:()=>document.getElementById("loader").style.display="none"});
+gsap.to("#loader",{opacity:0,delay:2,duration:1,onComplete:()=>loader.style.display="none"});
 
-/* SCROLL */
+/* SCROLL APPLE */
 gsap.utils.toArray("section").forEach(sec=>{
 gsap.from(sec,{
-opacity:0,y:100,duration:1,
-scrollTrigger:{trigger:sec,start:"top 80%",scrub:true}
+opacity:0,y:120,scale:0.98,
+duration:1.2,
+scrollTrigger:{trigger:sec,start:"top 85%",scrub:true}
 });
 });
 
@@ -250,31 +301,65 @@ after.style.width=x+"px";
 slider.style.left=x+"px";
 });
 
-/* FORM + WHATSAPP */
-const form=document.getElementById("form");
-const successMsg=document.getElementById("successMsg");
-
-form.addEventListener("submit", async function(e){
+/* FORM */
+document.getElementById("form").addEventListener("submit", async function(e){
 e.preventDefault();
+let data=new FormData(this);
 
-let data=new FormData(form);
-
-await fetch(form.action,{
+await fetch(this.action,{
 method:"POST",
 body:data,
 headers:{'Accept':'application/json'}
 });
 
-successMsg.classList.remove("hidden");
-form.reset();
+document.getElementById("successMsg").classList.remove("hidden");
 
-let nombre=data.get("nombre");
-let telefono=data.get("telefono");
-let mensaje=data.get("mensaje");
-
-let text=`Hola soy ${nombre}, mi número es ${telefono}. ${mensaje}`;
+let text=`Hola soy ${data.get("nombre")}, ${data.get("telefono")}, ${data.get("mensaje")}`;
 window.open(`https://wa.me/573172244861?text=${encodeURIComponent(text)}`);
 });
+
+/* CONTADOR */
+setInterval(()=>{
+document.getElementById("viewers").innerText = Math.floor(Math.random()*15)+8;
+},3000);
+
+/* CUPOS */
+let slots=7;
+setInterval(()=>{
+if(slots>2){
+slots--;
+document.getElementById("slots").innerText=slots;
+}
+},10000);
+
+/* TIMER */
+let time=300;
+setInterval(()=>{
+let m=Math.floor(time/60);
+let s=time%60;
+document.getElementById("timer").innerText=`${m}:${s<10?"0"+s:s}`;
+time = time>0 ? time-1 : 300;
+},1000);
+
+/* NOTIF */
+const names=["Juan","Camila","Andrés","Valentina","Sebastián","Laura"];
+const cities=["Medellín","Envigado","Bello","Sabaneta"];
+
+setInterval(()=>{
+let n=names[Math.floor(Math.random()*names.length)];
+let c=cities[Math.floor(Math.random()*cities.length)];
+
+let notif=document.getElementById("notif");
+notif.innerHTML=`🔥 ${n} de ${c} acaba de agendar`;
+notif.style.opacity=1;
+notif.style.transform="translateY(0)";
+
+setTimeout(()=>{
+notif.style.opacity=0;
+notif.style.transform="translateY(20px)";
+},4000);
+
+},8000);
 </script>
 
 </body>
