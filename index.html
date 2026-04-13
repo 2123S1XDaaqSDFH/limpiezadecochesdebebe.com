@@ -17,12 +17,21 @@ body{background:#0f0f0f;color:white;font-family:sans-serif}
 .bar{background:var(--brand);height:10px}
 .badge{font-size:11px;background:#222;padding:4px 8px;border-radius:6px}
 header{background:#000;position:sticky;top:0;z-index:50}
-.hero{min-height:60vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(#0006,#0f0f0f),url('./coches.jpg');background-size:cover;background-position:center}
+.hero{
+min-height:60vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(#0006,#0f0f0f),url('./coches.jpg');
+background-size:cover;
+background-position:center;
+}
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <header class="p-4 flex justify-between items-center">
   <div class="flex items-center gap-2">
     <img src="./Logo.png" class="h-8">
@@ -31,6 +40,7 @@ header{background:#000;position:sticky;top:0;z-index:50}
   <a href="https://wa.me/573172244861" class="btn text-xs">agendar</a>
 </header>
 
+<!-- HERO -->
 <section class="hero text-center px-4">
   <div>
     <h1 class="text-4xl md:text-6xl mb-4">limpieza premium</h1>
@@ -74,7 +84,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/fireba
 import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection } 
 from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
-/* 🔴 PEGA TU CONFIG AQUÍ */
+/* 🔥 TU CONFIG (YA LISTA) */
 const firebaseConfig = {
   apiKey: "AIzaSyCOHS3_iAgeABkBAR2QX3N4_nGRS0EODeA",
   authDomain: "tecnibaby-48685.firebaseapp.com",
@@ -149,7 +159,7 @@ document.getElementById("resultado").innerHTML=`
 `;
 }
 
-/* DASHBOARD */
+/* DASHBOARD TIEMPO REAL */
 onSnapshot(collection(db,"pedidos"), (snapshot)=>{
 let html="";
 snapshot.forEach(docu=>{
@@ -161,7 +171,7 @@ html+=`
 <p>ID: ${p.id}</p>
 
 <button onclick="window.updateEstado('${p.id}',${p.estado})" class="btn mt-2 text-xs">
-avanzar estado
+Avanzar estado
 </button>
 </div>
 `;
