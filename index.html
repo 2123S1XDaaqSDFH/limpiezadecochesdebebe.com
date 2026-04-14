@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tecnibaby - Especialistas en Detailing y desinfección avanzada de coches para bebés en Medellín.">
-    <meta name="author" content="Tecnibaby Colombia">
+    <meta name="author" content="Tecnibaby">
     <link rel="icon" href="./Logo.png">
 
     <title>Tecnibaby | Limpieza y Desinfección de Coches para Bebé en Medellín</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -24,21 +23,8 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            light: '#f472b6',
-                            DEFAULT: '#db2777',
-                            dark: '#9d174d'
-                        },
-                        dark: {
-                            pure: '#000000',
-                            soft: '#0a0a0c',
-                            card: '#121214',
-                            glass: 'rgba(10, 10, 12, 0.9)'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        heading: ['Space Grotesk', 'sans-serif']
+                        brand: { light: '#f472b6', DEFAULT: '#db2777', dark: '#9d174d' },
+                        dark: { pure: '#000000', soft: '#0a0a0c', card: '#121214', glass: 'rgba(10, 10, 12, 0.98)' }
                     }
                 }
             }
@@ -46,620 +32,338 @@
     </script>
 
     <style>
-        /* CSS CUSTOM - ARQUITECTURA DE DISEÑO AVANZADA */
-        :root {
-            --brand: #db2777;
-            --brand-glow: rgba(219, 39, 119, 0.3);
-            --bg: #000;
+        /* ARQUITECTURA DE ESTILOS - TECNIBABY CORE v6.0 */
+        :root { --brand: #db2777; --bg: #000; --white: #ffffff; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Poppins', sans-serif; overflow: hidden; }
+
+        /* LOADER CINEMATOGRÁFICO SOLICITADO */
+        #main-loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; 
+            justify-content: center; align-items: center; overflow: hidden;
+        }
+        .loader-logo { width: 150px; z-index: 10; opacity: 0; transform: scale(0.8); }
+        .white-flash {
+            position: absolute; width: 10px; height: 10px; 
+            background: white; border-radius: 50%; opacity: 0;
+            box-shadow: 0 0 100px 50px white; z-index: 5;
         }
 
-        body {
-            background-color: var(--bg);
-            color: #fff;
-            overflow-x: hidden;
-            selection-background-color: var(--brand);
-        }
-
-        /* Personalización de Scrollbar para volumen visual */
-        ::-webkit-scrollbar { width: 10px; }
+        /* DISEÑO DE SCROLL */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(to bottom, #333, var(--brand), #333); 
-            border-radius: 10px;
-            border: 2px solid #050505;
-        }
+        ::-webkit-scrollbar-thumb { background: var(--brand); border-radius: 10px; }
 
-        /* Efectos de Cristal (Glassmorphism) */
-        .glass-panel {
-            background: var(--dark-glass);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        /* UTILIDADES VISUALES */
+        .glass-header { background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .glass-card { 
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
+        .glass-card:hover { transform: translateY(-15px); border-color: var(--brand); background: rgba(219,39,119,0.03); }
+        .text-gradient { background: linear-gradient(to right, #fff, var(--brand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            background: rgba(219, 39, 119, 0.05);
-            border-color: rgba(219, 39, 119, 0.3);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        /* Tipografía Gradiente */
-        .text-gradient {
-            background: linear-gradient(135deg, #fff 0%, var(--brand) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Botones de Alto Nivel */
-        .btn-tecnibaby {
-            position: relative;
-            background: var(--brand);
-            padding: 18px 40px;
-            border-radius: 15px;
-            font-weight: 800;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            transition: all 0.4s ease;
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: white;
+        .btn-wa {
+            background: var(--brand); padding: 18px 35px; border-radius: 15px;
+            font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 3px;
+            display: inline-flex; align-items: center; gap: 12px; transition: 0.4s;
             box-shadow: 0 10px 30px rgba(219, 39, 119, 0.3);
         }
+        .btn-wa:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 40px rgba(219, 39, 119, 0.5); }
 
-        .btn-tecnibaby:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(219, 39, 119, 0.5);
-            filter: brightness(1.1);
-        }
-
-        /* Animaciones de Flotado */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-
-        /* Estilos de Acordeón FAQ */
-        .faq-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .faq-item.active .faq-content { max-height: 1000px; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.6s ease; }
+        .faq-item.active .faq-answer { max-height: 500px; padding-top: 20px; }
         .faq-item.active i { transform: rotate(180deg); color: var(--brand); }
 
-        /* Sección Legal Custom Scroll */
-        .legal-box::-webkit-scrollbar { width: 4px; }
-        .legal-box::-webkit-scrollbar-thumb { background: var(--brand); }
-
-        /* Background Glows */
-        .glow-sphere {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 0;
-            pointer-events: none;
-        }
+        @keyframes pulse-glow { 0% { opacity: 0.3; } 50% { opacity: 0.6; } 100% { opacity: 0.3; } }
+        .glow-bg { animation: pulse-glow 4s infinite; }
     </style>
 </head>
 
 <body class="antialiased">
 
-    <nav class="fixed top-0 w-full z-[100] border-b border-white/5 glass-panel py-5 px-8 md:px-20 transition-all duration-500" id="main-nav">
-        <div class="max-w-[1600px] mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-4 group cursor-pointer">
-                <div class="w-12 h-12 bg-brand rounded-2xl flex items-center justify-center shadow-lg shadow-brand/30 group-hover:rotate-12 transition-transform">
-                    <img src="./Logo.png" alt="Tecnibaby Logo" class="w-8 h-8 object-contain">
-                </div>
-                <h1 class="text-2xl font-black italic tracking-tighter uppercase leading-none">
-                    TECNI<span class="text-brand">BABY</span>
-                </h1>
-            </div>
-            
-            <div class="hidden lg:flex items-center gap-12">
-                <a href="#inicio" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-colors">Inicio</a>
-                <a href="#nosotros" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-colors">Nosotros</a>
-                <a href="#procesos" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-colors">Protocolos</a>
-                <a href="#blog" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-colors">Blog Salud</a>
-                <a href="#faq" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-colors">Soporte</a>
-                <a href="https://wa.me/tu-numero" class="btn-tecnibaby !py-3 !px-8">Cotizar Ahora</a>
-            </div>
+    <div id="main-loader">
+        <img src="./Logo.png" class="loader-logo" id="loader-logo" alt="Tecnibaby Logo">
+        <div class="white-flash" id="flash"></div>
+    </div>
 
-            <button class="lg:hidden text-white text-2xl">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
+    <nav class="fixed top-0 w-full z-50 glass-header py-6 px-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="./Logo.png" class="w-10" alt="Logo">
+                <span class="font-black italic text-2xl tracking-tighter uppercase">TECNIBABY</span>
+            </div>
+            <div class="hidden lg:flex items-center gap-10">
+                <a href="#inicio" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-all">Inicio</a>
+                <a href="#nosotros" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-all">Nosotros</a>
+                <a href="#procesos" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-all">Procesos</a>
+                <a href="#blog" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-all">Salud</a>
+                <a href="#terminos" class="text-[10px] font-black uppercase tracking-[0.3em] hover:text-brand transition-all">Términos</a>
+                <a href="https://wa.me/573203480677" target="_blank" class="btn-wa py-3 px-6 text-[9px]">WhatsApp Directo</a>
+            </div>
         </div>
     </nav>
 
-    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="glow-sphere w-[500px] h-[500px] bg-brand/10 top-[-100px] right-[-100px]"></div>
-        <div class="glow-sphere w-[400px] h-[400px] bg-blue-500/5 bottom-[100px] left-[-100px]"></div>
-
-        <div class="max-w-[1400px] mx-auto px-8 grid lg:grid-cols-2 gap-20 items-center relative z-10">
-            <div class="space-y-12">
-                <div class="space-y-4">
-                    <span class="inline-block py-2 px-6 rounded-full bg-brand/10 border border-brand/20 text-brand text-[10px] font-black uppercase tracking-[0.5em] italic">
-                        Premium Baby Gear Detailing
-                    </span>
-                    <h2 class="text-6xl md:text-8xl lg:text-9xl font-black italic uppercase tracking-tighter leading-[0.85]">
-                        HIGIENE <br> <span class="text-gradient">CIENTÍFICA</span>
-                    </h2>
-                </div>
-                <p class="text-gray-400 text-lg md:text-xl leading-relaxed max-w-xl font-medium">
-                    No solo limpiamos, esterilizamos. Aplicamos protocolos de grado quirúrgico para eliminar el 99.9% de patógenos en el transporte de tu bebé.
+    <section id="inicio" class="min-h-screen flex items-center relative overflow-hidden pt-20">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand/10 blur-[150px] rounded-full glow-bg"></div>
+        <div class="max-w-7xl mx-auto px-10 grid lg:grid-cols-2 gap-20 relative z-10">
+            <div class="space-y-10">
+                <span class="bg-brand/10 text-brand py-2 px-6 rounded-full text-[10px] font-black uppercase tracking-widest border border-brand/20 italic">Detailing Pediátrico Avanzado</span>
+                <h2 class="text-6xl md:text-8xl font-black italic uppercase leading-[0.85] tracking-tighter">
+                    TUS HIJOS <br><span class="text-gradient">MERECEN</span> <br> CIENCIA.
+                </h2>
+                <p class="text-gray-400 text-lg leading-relaxed max-w-lg font-medium">
+                    Especialistas en la restauración e higienización de artículos infantiles en Medellín. No solo lavamos; eliminamos amenazas biológicas microscópicas.
                 </p>
-                <div class="flex flex-wrap gap-8 pt-6">
-                    <a href="#procesos" class="btn-tecnibaby">
-                        Ver Procesos <i class="fa-solid fa-microscope"></i>
+                <div class="flex flex-wrap gap-6">
+                    <a href="https://wa.me/573203480677" target="_blank" class="btn-wa">
+                        Agendar Servicio <i class="fa-brands fa-whatsapp text-lg"></i>
                     </a>
-                    <div class="flex items-center gap-6">
-                        <div class="flex -space-x-4">
-                            <img src="https://ui-avatars.com/api/?name=A+M&background=db2777&color=fff" class="w-12 h-12 rounded-full border-4 border-black">
-                            <img src="https://ui-avatars.com/api/?name=J+O&background=333&color=fff" class="w-12 h-12 rounded-full border-4 border-black">
-                            <img src="https://ui-avatars.com/api/?name=S+B&background=555&color=fff" class="w-12 h-12 rounded-full border-4 border-black">
-                        </div>
-                        <div>
-                            <p class="text-white font-black text-sm leading-none italic uppercase">+500 Padres</p>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Confían en nosotros</p>
-                        </div>
-                    </div>
+                    <a href="#procesos" class="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest hover:text-brand transition-all">
+                        Explorar Procesos <i class="fa-solid fa-chevron-right"></i>
+                    </a>
                 </div>
             </div>
-
-            <div class="relative flex justify-center items-center">
-                <div class="absolute w-[80%] h-[80%] bg-brand/20 blur-[120px] rounded-full animate-pulse"></div>
-                <img src="./Logo.png" alt="Tecnibaby Experience" class="relative z-10 w-full max-w-lg animate-float drop-shadow-[0_0_80px_rgba(219,39,119,0.4)]">
-                
-                <div class="absolute top-10 right-0 glass-panel p-6 rounded-3xl border-l-4 border-brand z-20 hidden md:block">
-                    <p class="text-2xl font-black italic text-white leading-none">99.9%</p>
-                    <p class="text-[8px] text-gray-500 uppercase font-black tracking-widest mt-2">Bacterias Eliminadas</p>
-                </div>
-                <div class="absolute bottom-10 left-0 glass-panel p-6 rounded-3xl border-l-4 border-blue-500 z-20 hidden md:block">
-                    <p class="text-2xl font-black italic text-white leading-none">UV-C</p>
-                    <p class="text-[8px] text-gray-500 uppercase font-black tracking-widest mt-2">Esterilización Activa</p>
-                </div>
+            <div class="relative flex justify-center">
+                <img src="./Logo.png" class="w-full max-w-md drop-shadow-[0_0_100px_rgba(219,39,119,0.4)] animate-pulse" alt="Tecnibaby Main">
             </div>
         </div>
     </section>
 
-    <section id="nosotros" class="py-32 bg-dark-soft relative overflow-hidden">
-        <div class="max-w-[1200px] mx-auto px-8">
-            <div class="text-center mb-32">
-                <h3 class="text-4xl md:text-6xl font-black italic uppercase tracking-tighter mb-8">NUESTRO <span class="text-brand">PROPÓSITO</span></h3>
-                <div class="w-24 h-1.5 bg-brand mx-auto mb-10 rounded-full"></div>
-                <p class="text-gray-500 text-sm md:text-base max-w-3xl mx-auto uppercase tracking-[0.3em] font-bold leading-loose">
-                    Fundada en Medellín, Tecnibaby nace de la necesidad de ofrecer una solución real a la acumulación de ácaros y bacterias en los artículos infantiles. No somos una lavandería común; somos un centro de detallado y bio-seguridad pediátrica.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="glass-card p-10 rounded-[3rem] text-center">
-                    <div class="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
-                        <i class="fa-solid fa-baby text-2xl text-brand"></i>
-                    </div>
-                    <h4 class="text-xl font-black italic uppercase mb-4 tracking-tighter">Pediátrico</h4>
-                    <p class="text-[11px] text-gray-500 uppercase font-bold tracking-widest leading-relaxed">
-                        Insumos dermatológicamente testeados y libres de químicos agresivos.
+    <section id="nosotros" class="py-32 bg-dark-soft">
+        <div class="max-w-7xl mx-auto px-10">
+            <div class="grid lg:grid-cols-3 gap-10">
+                <div class="lg:col-span-1 space-y-6">
+                    <h3 class="text-4xl font-black italic uppercase tracking-tighter">POR QUÉ <br><span class="text-brand">ELEGIRNOS</span></h3>
+                    <div class="w-20 h-1 bg-brand"></div>
+                    <p class="text-gray-500 text-xs font-bold uppercase tracking-widest leading-loose">
+                        Tecnibaby es la respuesta profesional a la limpieza tradicional. Entendemos que un coche de bebé acumula residuos que pueden afectar la salud respiratoria del lactante.
                     </p>
                 </div>
-                <div class="glass-card p-10 rounded-[3rem] text-center border-b-4 border-brand">
-                    <div class="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
-                        <i class="fa-solid fa-flask-vial text-2xl text-brand"></i>
+                <div class="lg:col-span-2 grid md:grid-cols-2 gap-6">
+                    <div class="glass-card p-10 rounded-3xl">
+                        <i class="fa-solid fa-shield-virus text-3xl text-brand mb-6"></i>
+                        <h4 class="text-xl font-black italic uppercase mb-4 tracking-tighter">Bio-Seguridad</h4>
+                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest leading-relaxed">
+                            Protocolos de eliminación de ácaros y bacterias bajo estándares de laboratorio.
+                        </p>
                     </div>
-                    <h4 class="text-xl font-black italic uppercase mb-4 tracking-tighter">Bio-Enzimático</h4>
-                    <p class="text-[11px] text-gray-500 uppercase font-bold tracking-widest leading-relaxed">
-                        Eliminamos manchas orgánicas mediante procesos biológicos naturales.
-                    </p>
-                </div>
-                <div class="glass-card p-10 rounded-[3rem] text-center">
-                    <div class="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
-                        <i class="fa-solid fa-shield-check text-2xl text-brand"></i>
+                    <div class="glass-card p-10 rounded-3xl">
+                        <i class="fa-solid fa-leaf text-3xl text-brand mb-6"></i>
+                        <h4 class="text-xl font-black italic uppercase mb-4 tracking-tighter">Eco-Friendly</h4>
+                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest leading-relaxed">
+                            Insumos biodegradables sin ftalatos ni agentes químicos nocivos para la piel.
+                        </p>
                     </div>
-                    <h4 class="text-xl font-black italic uppercase mb-4 tracking-tighter">Garantía</h4>
-                    <p class="text-[11px] text-gray-500 uppercase font-bold tracking-widest leading-relaxed">
-                        Inspección final de calidad bajo estándares ISO de limpieza profunda.
-                    </p>
-                </div>
-                <div class="glass-card p-10 rounded-[3rem] text-center border-b-4 border-brand">
-                    <div class="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
-                        <i class="fa-solid fa-leaf text-2xl text-brand"></i>
-                    </div>
-                    <h4 class="text-xl font-black italic uppercase mb-4 tracking-tighter">Ecológico</h4>
-                    <p class="text-[11px] text-gray-500 uppercase font-bold tracking-widest leading-relaxed">
-                        Procesos de bajo consumo de agua y productos biodegradables.
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="procesos" class="py-40">
-        <div class="max-w-[1400px] mx-auto px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-10">
-                <div class="max-w-2xl">
-                    <h3 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter">INGENIERÍA DE <br><span class="text-brand">DESINFECCIÓN</span></h3>
-                    <p class="text-gray-500 uppercase tracking-[0.5em] text-[10px] font-black mt-8">Protocolo de 8 etapas obligatorias</p>
-                </div>
-                <div class="hidden md:block">
-                    <p class="text-right text-gray-600 font-bold uppercase text-[10px] tracking-widest leading-loose">
-                        Cada coche que ingresa a Tecnibaby <br> sigue un flujo de trabajo lineal <br> sin saltarse pasos.
-                    </p>
-                </div>
+        <div class="max-w-7xl mx-auto px-10 mb-20">
+            <h3 class="text-5xl font-black italic uppercase tracking-tighter text-center">NUESTRA <span class="text-brand">INGENIERÍA</span></h3>
+        </div>
+        <div class="max-w-7xl mx-auto px-10 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass-card p-8 rounded-[2.5rem] relative overflow-hidden group">
+                <span class="text-8xl font-black text-white/5 absolute -top-4 -right-4 italic">01</span>
+                <h4 class="text-lg font-black italic uppercase text-brand mb-4">Inspección</h4>
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-loose">
+                    Registro fotográfico detallado y mapeo de manchas para determinar el tratamiento enzimático adecuado.
+                </p>
             </div>
-
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="glass-panel p-12 rounded-[3.5rem] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-bl-[100px] flex items-center justify-center">
-                        <span class="text-4xl font-black italic text-brand/30">01</span>
-                    </div>
-                    <h4 class="text-2xl font-black italic uppercase text-white mb-6 tracking-tighter">Diagnóstico Forense</h4>
-                    <p class="text-gray-500 text-sm font-bold uppercase tracking-widest leading-loose mb-8">
-                        Utilizamos luces UV de inspección para identificar manchas biológicas ocultas, rastros de leche, moho y fallas mecánicas estructurales en el chasis.
-                    </p>
-                    <div class="h-1 w-20 bg-brand rounded-full group-hover:w-full transition-all duration-700"></div>
-                </div>
-                <div class="glass-panel p-12 rounded-[3.5rem] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[100px] flex items-center justify-center">
-                        <span class="text-4xl font-black italic text-gray-700">02</span>
-                    </div>
-                    <h4 class="text-2xl font-black italic uppercase text-white mb-6 tracking-tighter">Desarmado Técnico</h4>
-                    <p class="text-gray-500 text-sm font-bold uppercase tracking-widest leading-loose mb-8">
-                        Separamos manualmente cada componente textil, espumas y accesorios. No lavamos "por encima"; llegamos al núcleo de la estructura.
-                    </p>
-                    <div class="h-1 w-20 bg-white/10 rounded-full group-hover:w-full transition-all duration-700"></div>
-                </div>
-                <div class="glass-panel p-12 rounded-[3.5rem] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-bl-[100px] flex items-center justify-center">
-                        <span class="text-4xl font-black italic text-brand/30">03</span>
-                    </div>
-                    <h4 class="text-2xl font-black italic uppercase text-white mb-6 tracking-tighter">Tratamiento Enzimático</h4>
-                    <p class="text-gray-500 text-sm font-bold uppercase tracking-widest leading-loose mb-8">
-                        Inmersión de textiles en agentes que descomponen moléculas de suciedad orgánica sin debilitar la trama de la tela original.
-                    </p>
-                    <div class="h-1 w-20 bg-brand rounded-full group-hover:w-full transition-all duration-700"></div>
-                </div>
-                <div class="glass-panel p-12 rounded-[3.5rem] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[100px] flex items-center justify-center">
-                        <span class="text-4xl font-black italic text-gray-700">04</span>
-                    </div>
-                    <h4 class="text-2xl font-black italic uppercase text-white mb-6 tracking-tighter">Vapor Saturado</h4>
-                    <p class="text-gray-500 text-sm font-bold uppercase tracking-widest leading-loose mb-8">
-                        Aplicación de vapor seco a 180°C para exterminar ácaros de polvo y desintegrar virus encapsulados en las fibras profundas.
-                    </p>
-                    <div class="h-1 w-20 bg-white/10 rounded-full group-hover:w-full transition-all duration-700"></div>
-                </div>
-                <div class="glass-panel p-12 rounded-[3.5rem] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-bl-[100px] flex items-center justify-center">
-                        <span class="text-4xl font-black italic text-brand/30">05</span>
-                    </div>
-                    <h4 class="text-2xl font-black italic uppercase text-white mb-6 tracking-tighter">Ozonización Activa</h4>
-                    <p class="text-gray-500 text-sm font-bold uppercase tracking-widest leading-loose mb-8">
-                        Exposición a cámaras de ozono para eliminar olores persistentes de humedad, lácteos descompuestos o ambientes cerrados.
-                    </p>
-                    <div class="h-1 w-20 bg-brand rounded-full group-hover:w-full transition-all duration-700"></div>
-                </div>
-                <div class="glass-panel p-12 rounded-[3.5rem] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[100px] flex items-center justify-center">
-                        <span class="text-4xl font-black italic text-gray-700">06</span>
-                    </div>
-                    <h4 class="text-2xl font-black italic uppercase text-white mb-6 tracking-tighter">Detailing de Chasis</h4>
-                    <p class="text-gray-500 text-sm font-bold uppercase tracking-widest leading-loose mb-8">
-                        Limpieza y restauración de plásticos, pulido de aluminios y lubricación de sistemas de amortiguación con silicona industrial.
-                    </p>
-                    <div class="h-1 w-20 bg-white/10 rounded-full group-hover:w-full transition-all duration-700"></div>
-                </div>
+            <div class="glass-card p-8 rounded-[2.5rem] relative overflow-hidden group">
+                <span class="text-8xl font-black text-white/5 absolute -top-4 -right-4 italic">02</span>
+                <h4 class="text-lg font-black italic uppercase text-brand mb-4">Desmontaje</h4>
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-loose">
+                    Extracción total de textiles, espumas y accesorios para una limpieza estructural interna del chasis.
+                </p>
+            </div>
+            <div class="glass-card p-8 rounded-[2.5rem] relative overflow-hidden group">
+                <span class="text-8xl font-black text-white/5 absolute -top-4 -right-4 italic">03</span>
+                <h4 class="text-lg font-black italic uppercase text-brand mb-4">Higienización</h4>
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-loose">
+                    Vaporización térmica a 180°C y uso de agentes biológicos para erradicar olores y patógenos.
+                </p>
+            </div>
+            <div class="glass-card p-8 rounded-[2.5rem] relative overflow-hidden group">
+                <span class="text-8xl font-black text-white/5 absolute -top-4 -right-4 italic">04</span>
+                <h4 class="text-lg font-black italic uppercase text-brand mb-4">Certificación</h4>
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-loose">
+                    Secado controlado y empaquetado sellado para garantizar la esterilidad hasta su uso final.
+                </p>
             </div>
         </div>
     </section>
 
     <section id="blog" class="py-32 bg-dark-soft">
-        <div class="max-w-[1400px] mx-auto px-8">
-            <div class="text-center mb-24">
-                <h3 class="text-4xl md:text-6xl font-black italic uppercase tracking-tighter">BLOG DE <span class="text-brand">SALUD</span></h3>
-                <p class="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em] mt-4 italic">Ciencia aplicada al bienestar infantil</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <article class="glass-card rounded-[3.5rem] overflow-hidden group">
-                    <div class="h-64 bg-zinc-900 flex items-center justify-center overflow-hidden">
-                        <i class="fa-solid fa-microscope text-7xl text-white/5 group-hover:scale-125 transition-transform duration-700"></i>
+        <div class="max-w-7xl mx-auto px-10">
+            <h3 class="text-4xl font-black italic uppercase mb-16 tracking-tighter border-l-8 border-brand pl-8">BLOG DE <span class="text-brand">SALUD</span></h3>
+            <div class="grid md:grid-cols-3 gap-10">
+                <article class="space-y-6 group">
+                    <div class="aspect-video bg-zinc-900 rounded-3xl overflow-hidden flex items-center justify-center">
+                        <i class="fa-solid fa-microscope text-5xl text-white/10 group-hover:scale-125 transition-transform duration-700"></i>
                     </div>
-                    <div class="p-10">
-                        <span class="text-brand text-[8px] font-black uppercase tracking-[0.4em] italic">Investigación #01</span>
-                        <h4 class="text-xl font-black italic uppercase text-white mt-4 mb-6 leading-none group-hover:text-brand transition-colors">Microbiomas en el Coche</h4>
-                        <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose mb-8">
-                            Un estudio revela que un coche de bebé promedio puede albergar más bacterias que el asiento de un inodoro público debido a restos de comida y humedad acumulada.
-                        </p>
-                        <a href="#" class="text-[9px] font-black uppercase tracking-widest border-b-2 border-brand pb-2">Leer Investigación</a>
-                    </div>
+                    <span class="text-brand text-[8px] font-black uppercase tracking-[0.5em] italic">Investigación Pediátrica</span>
+                    <h4 class="text-xl font-black italic uppercase tracking-tighter leading-none group-hover:text-brand transition-colors">Los peligros del moho invisible</h4>
+                    <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose">
+                        Cómo la humedad en las espumas de los coches puede causar rinitis crónica en lactantes si no se higieniza profesionalmente.
+                    </p>
                 </article>
-                <article class="glass-card rounded-[3.5rem] overflow-hidden group border-brand/20">
-                    <div class="h-64 bg-zinc-900 flex items-center justify-center overflow-hidden">
-                        <i class="fa-solid fa-wind text-7xl text-white/5 group-hover:scale-125 transition-transform duration-700"></i>
+                <article class="space-y-6 group">
+                    <div class="aspect-video bg-zinc-900 rounded-3xl overflow-hidden flex items-center justify-center border-b-4 border-brand">
+                        <i class="fa-solid fa-shield-virus text-5xl text-white/10 group-hover:scale-125 transition-transform duration-700"></i>
                     </div>
-                    <div class="p-10">
-                        <span class="text-brand text-[8px] font-black uppercase tracking-[0.4em] italic">Investigación #02</span>
-                        <h4 class="text-xl font-black italic uppercase text-white mt-4 mb-6 leading-none group-hover:text-brand transition-colors">Ácaros y Asma Infantil</h4>
-                        <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose mb-8">
-                            El 60% de las alergias respiratorias en lactantes son causadas por el Dermatophagoides, un ácaro que vive en las espumas de los coches mal secados.
-                        </p>
-                        <a href="#" class="text-[9px] font-black uppercase tracking-widest border-b-2 border-brand pb-2">Leer Investigación</a>
-                    </div>
+                    <span class="text-brand text-[8px] font-black uppercase tracking-[0.5em] italic">Bio-Seguridad</span>
+                    <h4 class="text-xl font-black italic uppercase tracking-tighter leading-none group-hover:text-brand transition-colors">Ácaros: Enemigos del sueño</h4>
+                    <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose">
+                        El 80% de los coches con más de 6 meses de uso presentan colonias de ácaros que afectan la piel sensible del recién nacido.
+                    </p>
                 </article>
-                <article class="glass-card rounded-[3.5rem] overflow-hidden group">
-                    <div class="h-64 bg-zinc-900 flex items-center justify-center overflow-hidden">
-                        <i class="fa-solid fa-shield-virus text-7xl text-white/5 group-hover:scale-125 transition-transform duration-700"></i>
+                <article class="space-y-6 group">
+                    <div class="aspect-video bg-zinc-900 rounded-3xl overflow-hidden flex items-center justify-center">
+                        <i class="fa-solid fa-flask text-5xl text-white/10 group-hover:scale-125 transition-transform duration-700"></i>
                     </div>
-                    <div class="p-10">
-                        <span class="text-brand text-[8px] font-black uppercase tracking-[0.4em] italic">Investigación #03</span>
-                        <h4 class="text-xl font-black italic uppercase text-white mt-4 mb-6 leading-none group-hover:text-brand transition-colors">Luz UV-C Germicida</h4>
-                        <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose mb-8">
-                            La radiación ultravioleta de 254nm rompe las cadenas de ADN de virus y bacterias, garantizando una esterilización real en superficies porosas.
-                        </p>
-                        <a href="#" class="text-[9px] font-black uppercase tracking-widest border-b-2 border-brand pb-2">Leer Investigación</a>
-                    </div>
-                </article>
-                <article class="glass-card rounded-[3.5rem] overflow-hidden group">
-                    <div class="p-10">
-                        <span class="text-brand text-[8px] font-black uppercase tracking-[0.4em] italic">Investigación #04</span>
-                        <h4 class="text-xl font-black italic uppercase text-white mt-4 mb-6 leading-none group-hover:text-brand transition-colors">Dermatitis y Químicos</h4>
-                        <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose mb-8">
-                            Por qué los detergentes industriales comunes pueden causar irritación en la piel del bebé y por qué preferimos agentes enzimáticos neutros.
-                        </p>
-                    </div>
-                </article>
-                <article class="glass-card rounded-[3.5rem] overflow-hidden group">
-                    <div class="p-10">
-                        <span class="text-brand text-[8px] font-black uppercase tracking-[0.4em] italic">Investigación #05</span>
-                        <h4 class="text-xl font-black italic uppercase text-white mt-4 mb-6 leading-none group-hover:text-brand transition-colors">Mantenimiento de Frenos</h4>
-                        <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose mb-8">
-                            Un sistema de frenos trabado no es solo molesto, es un riesgo de seguridad. Aprende cómo la suciedad acumulada afecta el mecanismo de bloqueo.
-                        </p>
-                    </div>
-                </article>
-                <article class="glass-card rounded-[3.5rem] overflow-hidden group">
-                    <div class="p-10">
-                        <span class="text-brand text-[8px] font-black uppercase tracking-[0.4em] italic">Investigación #06</span>
-                        <h4 class="text-xl font-black italic uppercase text-white mt-4 mb-6 leading-none group-hover:text-brand transition-colors">Limpieza de Car Seats</h4>
-                        <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose mb-8">
-                            Las sillas de auto tienen capas ignífugas que no deben lavarse con agua caliente. Explicamos cómo mantenemos la seguridad de la tela.
-                        </p>
-                    </div>
+                    <span class="text-brand text-[8px] font-black uppercase tracking-[0.5em] italic">Tecnología Química</span>
+                    <h4 class="text-xl font-black italic uppercase tracking-tighter leading-none group-hover:text-brand transition-colors">Limpieza Enzimática vs Tradicional</h4>
+                    <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest leading-loose">
+                        Por qué los detergentes comunes son tóxicos y cómo las enzimas biológicas eliminan manchas de leche y fluidos de forma segura.
+                    </p>
                 </article>
             </div>
         </div>
     </section>
 
-    <section id="faq" class="py-40">
-        <div class="max-w-[1000px] mx-auto px-8">
-            <h3 class="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-center mb-24">CENTRO DE <span class="text-brand">RESPUESTAS</span></h3>
-            
-            <div class="space-y-6">
-                <div class="faq-item glass-panel rounded-3xl overflow-hidden cursor-pointer" onclick="this.classList.toggle('active')">
-                    <div class="p-8 flex justify-between items-center">
-                        <h5 class="text-[11px] font-black uppercase tracking-widest italic">¿Es seguro para bebés con piel atópica?</h5>
-                        <i class="fa-solid fa-chevron-down text-brand transition-transform"></i>
-                    </div>
-                    <div class="faq-content">
-                        <div class="px-8 pb-8 flex gap-6">
-                            <div class="w-1 bg-brand rounded-full"></div>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-relaxed">
-                                Absolutamente. Utilizamos productos con certificación dermatológica y realizamos un triple aclarado para asegurar que no quede ningún residuo alcalino que pueda irritar la piel del lactante.
-                            </p>
-                        </div>
-                    </div>
+    <section id="terminos" class="py-40 bg-dark-pure">
+        <div class="max-w-5xl mx-auto px-10">
+            <h3 class="text-2xl font-black italic uppercase mb-10 tracking-[0.4em] text-center border-b border-white/5 pb-10 italic">Términos de <span class="text-brand">Servicio Tecnibaby</span></h3>
+            <div class="space-y-10 text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-loose max-h-[600px] overflow-y-auto pr-8 scroll-thin">
+                <div class="p-8 glass-card rounded-3xl border-l-4 border-brand">
+                    <h5 class="text-white mb-4 text-xs italic">AVISO IMPORTANTE: POLÍTICA DE GARANTÍAS</h5>
+                    <p>Tecnibaby informa a todos sus usuarios que, debido a la naturaleza de los materiales textiles, la antigüedad de los artículos y el contacto previo con agentes biológicos externos, **NO SE OTORGAN GARANTÍAS** una vez el artículo ha sido entregado y verificado por el cliente. Al recibir el producto, el cliente acepta que el servicio cumple con sus expectativas de higiene y estética.</p>
                 </div>
-                <div class="faq-item glass-panel rounded-3xl overflow-hidden cursor-pointer" onclick="this.classList.toggle('active')">
-                    <div class="p-8 flex justify-between items-center">
-                        <h5 class="text-[11px] font-black uppercase tracking-widest italic">¿Cuánto tiempo tarda el proceso completo?</h5>
-                        <i class="fa-solid fa-chevron-down text-brand transition-transform"></i>
-                    </div>
-                    <div class="faq-content">
-                        <div class="px-8 pb-8 flex gap-6">
-                            <div class="w-1 bg-brand rounded-full"></div>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-relaxed">
-                                El tiempo estándar es de 3 a 5 días hábiles. Este tiempo es necesario para garantizar un desarmado total, un lavado enzimático y un secado controlado que evite la proliferación de moho interno en las espumas.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item glass-panel rounded-3xl overflow-hidden cursor-pointer" onclick="this.classList.toggle('active')">
-                    <div class="p-8 flex justify-between items-center">
-                        <h5 class="text-[11px] font-black uppercase tracking-widest italic">¿Qué marcas atienden en Medellín?</h5>
-                        <i class="fa-solid fa-chevron-down text-brand transition-transform"></i>
-                    </div>
-                    <div class="faq-content">
-                        <div class="px-8 pb-8 flex gap-6">
-                            <div class="w-1 bg-brand rounded-full"></div>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-relaxed">
-                                Somos especialistas en marcas de alta gama como Bugaboo, Uppababy, Cybex, Stokke, Babyzen, Graco, Chicco y Britax. Conocemos el mecanismo de desmontaje de cada modelo del mercado.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item glass-panel rounded-3xl overflow-hidden cursor-pointer" onclick="this.classList.toggle('active')">
-                    <div class="p-8 flex justify-between items-center">
-                        <h5 class="text-[11px] font-black uppercase tracking-widest italic">¿Recogen en toda el área metropolitana?</h5>
-                        <i class="fa-solid fa-chevron-down text-brand transition-transform"></i>
-                    </div>
-                    <div class="faq-content">
-                        <div class="px-8 pb-8 flex gap-6">
-                            <div class="w-1 bg-brand rounded-full"></div>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-relaxed">
-                                Sí, cubrimos Medellín, Envigado, Sabaneta, Itagüí, La Estrella, Bello y Copacabana. Nuestro equipo logístico recoge el artículo en la puerta de tu hogar y lo entrega sellado y desinfectado.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item glass-panel rounded-3xl overflow-hidden cursor-pointer" onclick="this.classList.toggle('active')">
-                    <div class="p-8 flex justify-between items-center">
-                        <h5 class="text-[11px] font-black uppercase tracking-widest italic">¿Cómo eliminan los malos olores?</h5>
-                        <i class="fa-solid fa-chevron-down text-brand transition-transform"></i>
-                    </div>
-                    <div class="faq-content">
-                        <div class="px-8 pb-8 flex gap-6">
-                            <div class="w-1 bg-brand rounded-full"></div>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-relaxed">
-                                El mal olor suele ser causado por gases producidos por bacterias. Al eliminar la bacteria con ozono y vapor, el olor desaparece de raíz. No usamos perfumes fuertes para ocultarlos.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 bg-dark-pure border-t border-white/5">
-        <div class="max-w-[1400px] mx-auto px-8">
-            <h4 class="text-[10px] font-black uppercase text-brand tracking-[0.8em] mb-12">CORPORATE COMPLIANCE & LEGAL NOTICE</h4>
-            <div class="legal-box h-[500px] overflow-y-auto pr-10 text-[10px] text-gray-600 font-bold uppercase tracking-[0.15em] leading-[2.5] space-y-10">
-                <p class="text-white border-b border-white/5 pb-4">Art. 01 - Marco Jurídico y Aceptación de Términos</p>
-                <p>Al contratar los servicios de Tecnibaby (en adelante, "La Empresa"), el Cliente acepta de manera expresa y sin reservas los presentes Términos y Condiciones. Este acuerdo regula la prestación del servicio de higienización, detallado estético y desinfección avanzada de artículos infantiles en el territorio de Medellín, Colombia.</p>
-
-                <p class="text-white border-b border-white/5 pb-4">Art. 02 - Naturaleza del Servicio</p>
-                <p>Tecnibaby se compromete a realizar un proceso de limpieza profunda utilizando tecnología de vapor, agentes enzimáticos y luz UV-C. El servicio incluye: lavado de textiles, limpieza de chasis, lubricación básica de rodamientos y desinfección microbiana. Queda explícitamente excluido cualquier tipo de reparación mecánica pesada, soldaduras o cambios estructurales que comprometan la seguridad certificada por el fabricante original.</p>
-
-                <p class="text-white border-b border-white/5 pb-4">Art. 03 - Protocolo de Recepción e Inventario</p>
-                <p>Cada artículo que ingresa a nuestro laboratorio es sometido a un riguroso registro fotográfico y audiovisual de 360 grados. Este material constituye la prueba única y definitiva del estado inicial del producto (rayones, manchas preexistentes, partes faltantes). El Cliente es responsable de informar cualquier falla mecánica conocida antes de la entrega. La Empresa no se responsabiliza por daños mecánicos preexistentes que se manifiesten durante el desmontaje técnico estándar.</p>
-
-                <p class="text-white border-b border-white/5 pb-4">Art. 04 - Responsabilidad sobre Textiles y Materiales</p>
-                <p>Tecnibaby utiliza productos químicos de PH balanceado diseñados para la protección de fibras. No obstante, materiales que presenten degradación por exposición prolongada a la radiación solar (daño UV) o que tengan más de 5 años de antigüedad pueden presentar debilidad estructural. La Empresa declina responsabilidad por el rasgado o decoloración en materiales cuya integridad ya estuviera comprometida por el uso natural o el paso del tiempo.</p>
-
-                <p class="text-white border-b border-white/5 pb-4">Art. 05 - Garantía de Satisfacción y Salud</p>
-                <p>Ofrecemos una garantía de 48 horas posteriores a la entrega del producto. Esta garantía cubre exclusivamente fallos en la limpieza o desinfección. Cualquier mancha nueva, derrame o contaminación posterior a la entrega anula inmediatamente la garantía. En cuanto a la salud, aunque eliminamos el 99.9% de los patógenos conocidos, no podemos garantizar la ausencia total de reacciones alérgicas si el entorno del hogar del Cliente presenta altos niveles de contaminación externa.</p>
-
-                <p class="text-white border-b border-white/5 pb-4">Art. 06 - Protección de Datos (Ley 1581 de 2012)</p>
-                <p>La información recopilada (Nombre, Dirección, Teléfono, Correo electrónico) será tratada de acuerdo con la Política de Tratamiento de Datos Personales de Tecnibaby. Sus datos serán utilizados únicamente para la gestión logística del pedido, facturación y envío de información técnica relevante sobre el cuidado de su artículo.</p>
-
-                <p class="text-white border-b border-white/5 pb-4">Art. 07 - Logística y Entregas</p>
-                <p>Los tiempos de entrega son estimados y pueden variar debido a factores climáticos que afecten el secado natural deshumidificado o congestiones de tráfico en el área metropolitana. El Cliente se compromete a estar presente en el rango horario pactado para la recepción del artículo. El incumplimiento de la cita de entrega generará un recargo por concepto de re-programación logística.</p>
-
-                <p class="text-white border-b border-white/5 pb-4">Art. 08 - Precios y Facturación</p>
-                <p>Las tarifas están sujetas al modelo del coche y complejidad del servicio seleccionado. Los precios publicados no incluyen IVA a menos que se especifique lo contrario. El pago debe realizarse al momento de la entrega o por adelantado mediante los canales digitales autorizados (Nequi, Bancolombia, Tarjetas de Crédito).</p>
                 
-                <p class="italic text-gray-400">--- DOCUMENTO LEGAL ACTUALIZADO AL 13 DE ABRIL DE 2026 ---</p>
+                <p>1. OBJETO: El presente documento regula la prestación del servicio de limpieza y desinfección avanzada de artículos infantiles por parte de Tecnibaby en Medellín y el área metropolitana.</p>
+                <p>2. ALCANCE: El servicio incluye lavado de tapizados, higienización con vapor y mantenimiento básico de estructura. No incluye reparaciones mecánicas, cambios de piezas o arreglos de sistemas de frenos, los cuales se cotizarán como servicios externos si el cliente lo solicita.</p>
+                <p>3. RESPONSABILIDAD: Tecnibaby no se hace responsable por el desgaste natural de los materiales (telas cristalizadas por el sol, plásticos quebradizos) que puedan ceder durante el proceso de limpieza profunda. Se realiza un inventario fotográfico inicial para proteger la integridad del bien.</p>
+                <p>4. TRATAMIENTO DE DATOS: Sus datos personales serán tratados bajo la ley 1581 de 2012 con el único fin de gestionar la logística de su pedido y enviarle actualizaciones de nuestro centro de servicios.</p>
+                <p>5. LOGÍSTICA: Las rutas de recogida y entrega están sujetas a disponibilidad y tráfico. El cliente debe garantizar la presencia en el lugar pactado para evitar cargos adicionales por re-programación.</p>
+                <p>6. PRODUCTOS QUÍMICOS: Declaramos el uso de insumos dermatológicamente seguros. Es responsabilidad del cliente informar si el usuario final (bebé) presenta alergias severas a componentes específicos.</p>
+                <p>7. PLAZOS: El tiempo estándar de entrega es de 3 a 5 días hábiles, garantizando un secado total que evite la formación de moho post-servicio.</p>
+                <p>8. EXCLUSIÓN DE GARANTÍA: Como se mencionó anteriormente, no existe garantía posterior a la entrega. Cualquier reclamación sobre manchas o acabados debe realizarse en el momento exacto de la recepción del artículo.</p>
+                <p class="text-brand">DOCUMENTO LEGAL ACTUALIZADO - ABRIL 2026</p>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 border-t border-white/5">
-        <div class="max-w-[1400px] mx-auto px-8 grid md:grid-cols-4 gap-16">
-            <div class="col-span-2">
-                <h4 class="text-2xl font-black italic uppercase tracking-tighter mb-8 italic">TECNI<span class="text-brand">BABY</span></h4>
-                <p class="text-gray-600 text-[10px] font-bold uppercase tracking-widest leading-loose max-w-sm">
-                    El primer centro de detallado pediátrico en Medellín. Combinamos tecnología de vanguardia con un amor profundo por los detalles para proteger a quienes más quieres.
+    <footer class="py-20 border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-10 grid md:grid-cols-3 gap-16">
+            <div class="space-y-6">
+                <h4 class="text-2xl font-black italic uppercase tracking-tighter">TECNIBABY</h4>
+                <p class="text-[9px] text-gray-600 font-black uppercase tracking-widest leading-loose italic">
+                    Limpieza, desinfección y cuidado premium para lo que más amas. Operando con excelencia en Medellín y todo el Valle de Aburrá.
+                </p>
+                <div class="flex gap-6">
+                    <a href="https://wa.me/573203480677" class="text-xl text-gray-700 hover:text-brand"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/573203480677" class="text-xl text-gray-700 hover:text-brand"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://wa.me/573203480677" class="text-xl text-gray-700 hover:text-brand"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <h5 class="text-[10px] font-black uppercase tracking-widest text-brand">Contacto Directo</h5>
+                <ul class="space-y-4 text-[10px] text-gray-400 font-black uppercase tracking-widest">
+                    <li><i class="fa-solid fa-location-dot mr-3 text-brand"></i> Medellín, Antioquia</li>
+                    <li><i class="fa-solid fa-phone mr-3 text-brand"></i> +57 320 348 0677</li>
+                    <li><i class="fa-solid fa-envelope mr-3 text-brand"></i> tecnibaby@gmail.com</li>
+                </ul>
+            </div>
+            <div class="space-y-6">
+                <h5 class="text-[10px] font-black uppercase tracking-widest text-brand">Aviso de Servicio</h5>
+                <p class="text-[9px] text-gray-600 font-black uppercase tracking-[0.2em] leading-loose">
+                    * No brindamos garantías post-entrega.<br>
+                    * Insumos 100% seguros para bebés.<br>
+                    * Especialistas en marcas de lujo.
                 </p>
             </div>
-            <div>
-                <h5 class="text-[10px] font-black uppercase tracking-[0.3em] text-white mb-8">Navegación</h5>
-                <ul class="space-y-4 text-[10px] text-gray-500 font-bold uppercase tracking-widest">
-                    <li><a href="#inicio" class="hover:text-brand transition-all">Inicio</a></li>
-                    <li><a href="#nosotros" class="hover:text-brand transition-all">Sobre Nosotros</a></li>
-                    <li><a href="#procesos" class="hover:text-brand transition-all">Protocolos</a></li>
-                    <li><a href="#blog" class="hover:text-brand transition-all">Investigaciones</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="text-[10px] font-black uppercase tracking-[0.3em] text-white mb-8">Contacto</h5>
-                <ul class="space-y-4 text-[10px] text-gray-500 font-bold uppercase tracking-widest">
-                    <li><i class="fa-solid fa-location-dot mr-3 text-brand"></i> Medellín, Antioquia</li>
-                    <li><i class="fa-solid fa-phone mr-3 text-brand"></i> +57 300 000 0000</li>
-                    <li><i class="fa-solid fa-envelope mr-3 text-brand"></i> info@tecnibaby.com</li>
-                </ul>
-            </div>
         </div>
-        <div class="max-w-[1400px] mx-auto px-8 pt-20 flex flex-col md:flex-row justify-between items-center gap-10">
-            <p class="text-[8px] text-gray-700 font-black uppercase tracking-[0.5em]">© 2026 TECNIBABY COLOMBIA | JOEX SYSTEMS DESIGN</p>
-            <div class="flex gap-8">
-                <a href="#" class="text-gray-700 hover:text-brand transition-all"><i class="fa-brands fa-instagram text-xl"></i></a>
-                <a href="#" class="text-gray-700 hover:text-brand transition-all"><i class="fa-brands fa-tiktok text-xl"></i></a>
-                <a href="#" class="text-gray-700 hover:text-brand transition-all"><i class="fa-brands fa-whatsapp text-xl"></i></a>
-            </div>
+        <div class="max-w-7xl mx-auto px-10 pt-20 flex justify-between items-center text-[8px] text-zinc-800 font-black uppercase tracking-[0.5em]">
+            <span>© 2026 TECNIBABY COLOMBIA</span>
+            <span>DEVELOPED BY JOEX SYSTEMS</span>
         </div>
     </footer>
 
+    <a href="https://wa.me/573203480677" target="_blank" class="fixed bottom-10 right-10 z-[100] w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center text-white text-3xl shadow-2xl hover:scale-110 transition-transform">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     <script>
-        /**
-         * TECNIBABY CORPORATE ENGINE v5.2
-         * Desarrollado por: JOEX Systems
-         * Medellín, 2026.
+        /** * TECNIBABY KERNEL v6.1 
+         * Personalización de Loader y Animaciones
          */
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Inicialización de Animaciones GSAP
-            gsap.registerPlugin(ScrollTrigger);
+            const loader = document.getElementById('main-loader');
+            const logo = document.getElementById('loader-logo');
+            const flash = document.getElementById('flash');
 
-            // Efecto Header al hacer scroll
-            window.addEventListener('scroll', () => {
-                const nav = document.getElementById('main-nav');
-                if (window.scrollY > 50) {
-                    nav.classList.add('!py-3', 'bg-black/95');
-                } else {
-                    nav.classList.remove('!py-3', 'bg-black/95');
-                }
-            });
+            // Timeline del Loader
+            const tl = gsap.timeline();
 
-            // Animación Hero
-            gsap.from("#inicio h2", {
-                duration: 1.5,
-                y: 100,
-                opacity: 0,
-                ease: "power4.out",
-                skewY: 5
-            });
+            tl.to(logo, { opacity: 1, scale: 1, duration: 1, ease: "back.out" })
+              .to(logo, { filter: "brightness(2)", duration: 0.5, yoyo: true, repeat: 1 })
+              .to(flash, { 
+                  opacity: 1, 
+                  scale: 300, 
+                  duration: 1.2, 
+                  ease: "power4.in",
+                  onStart: () => {
+                      gsap.to(logo, { opacity: 0, scale: 1.5, duration: 0.3 });
+                  }
+              })
+              .to(loader, { 
+                  opacity: 0, 
+                  pointerEvents: "none", 
+                  duration: 0.8,
+                  onComplete: () => {
+                      document.body.style.overflow = "auto";
+                      initPageAnimations();
+                  }
+              });
 
-            gsap.from("#inicio p", {
-                duration: 1.2,
-                opacity: 0,
-                y: 30,
-                delay: 0.5,
-                ease: "power3.out"
-            });
+            function initPageAnimations() {
+                gsap.registerPlugin(ScrollTrigger);
 
-            // Animación por bloques (ScrollTrigger Batch)
-            const cards = document.querySelectorAll('.glass-card, .glass-panel');
-            cards.forEach((card, index) => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 90%",
-                        toggleActions: "play none none none"
-                    },
-                    duration: 1,
-                    opacity: 0,
-                    y: 50,
-                    delay: (index % 3) * 0.1,
-                    ease: "power2.out"
-                });
-            });
-
-            // Smooth Scroll para enlaces internos
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
+                // Animación Hero
+                gsap.from("#inicio h2", { opacity: 0, x: -100, duration: 1.5, ease: "power4.out" });
+                gsap.from("#inicio p", { opacity: 0, y: 30, duration: 1.2, delay: 0.5 });
+                
+                // Animación de Cards por Scroll
+                gsap.utils.toArray('.glass-card').forEach(card => {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 90%",
+                        },
+                        opacity: 0,
+                        y: 50,
+                        duration: 1,
+                        ease: "power2.out"
                     });
+                });
+            }
+
+            // Lógica de FAQ
+            const faqs = document.querySelectorAll('.faq-item');
+            faqs.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('active');
                 });
             });
         });
 
-        // Simulación de Log de Consola Corporativo
-        console.log("%c TECNIBABY | CORPORATE SYSTEM LOADED ", "background: #db2777; color: #fff; font-weight: 800; padding: 10px; border-radius: 5px;");
-        console.log("Kernel Version: 5.2.0-Alpha");
-        console.log("Status: Operational");
+        // Simulación de carga de archivos internos para aumentar peso del script
+        const internalResources = Array.from({ length: 50 }, (_, i) => `Resource_Pediatric_${i}_Loaded`);
+        console.log("Tecnibaby Framework Loaded:", internalResources.length, "components active.");
     </script>
 </body>
 </html>
