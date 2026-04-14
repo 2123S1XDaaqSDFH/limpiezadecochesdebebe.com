@@ -1,34 +1,101 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- GOOGLE VERIFICATION -->
 <meta name="google-site-verification" content="AXQ5Zw2tSj57ulQTVCClux0X0dzFYfcqrjjyVcF5O5c" />
 
-<!-- SEO -->
-<title>Limpieza y Desinfección de Coches para Bebé en Medellín | Servicio Premium</title>
+<title>Tecnibaby | Limpieza de coches para bebé en Medellín</title>
 
-<meta name="description" content="Servicio profesional de limpieza y desinfección de coches para bebé en Medellín. Eliminamos bacterias, suciedad y malos olores. Servicio a domicilio premium para la salud de tu bebé.">
+<meta name="description" content="Limpieza profesional de coches para bebé en Medellín. Eliminamos bacterias, ácaros y suciedad invisible. Servicio a domicilio premium.">
 
-<meta name="keywords" content="limpieza coches bebé Medellín, desinfección cochecito bebé, lavado coches bebé Medellín, limpieza infantil a domicilio">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
-:root{--brand:#FA008A;}
 
-body{
-background:#050505;
-color:white;
-font-family:Arial, sans-serif;
-overflow-x:hidden;
+:root{
+--brand:#0ea5e9;
+--dark:#0b0b0f;
+--green:#22c55e;
+--white:#ffffff;
 }
 
-/* NAV */
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:var(--dark);
+color:white;
+}
+
+/* ================= BUTTON SYSTEM (tipo premium UI) ================= */
+
+.btn{
+padding:12px 18px;
+border-radius:12px;
+font-weight:600;
+text-decoration:none;
+transition:.3s;
+display:inline-block;
+border:1px solid transparent;
+}
+
+.btn-primary{
+background:linear-gradient(45deg,#0ea5e9,#2563eb);
+color:white;
+}
+
+.btn-primary:hover{
+transform:scale(1.05);
+filter:brightness(1.1);
+}
+
+.btn-green{
+background:linear-gradient(45deg,#22c55e,#16a34a);
+color:white;
+}
+
+.btn-outline{
+border:1px solid white;
+background:transparent;
+}
+
+.btn-outline:hover{
+background:white;
+color:black;
+}
+
+/* ================= LOADER ================= */
+
+#loader{
+position:fixed;
+inset:0;
+background:black;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+#loader img{
+width:150px;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(.9);opacity:.4;}
+50%{transform:scale(1);opacity:1;}
+100%{transform:scale(.9);opacity:.4;}
+}
+
+/* ================= NAV ================= */
+
 nav{
 position:fixed;
 top:0;
@@ -36,95 +103,167 @@ width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 25px;
+padding:15px 20px;
 background:rgba(0,0,0,.6);
-backdrop-filter:blur(10px);
-z-index:50;
+backdrop-filter:blur(12px);
+z-index:1000;
 }
 
-.btn{
-background:var(--brand);
-padding:12px 20px;
-border-radius:10px;
-transition:.3s;
-color:white;
-text-decoration:none;
-display:inline-block;
-}
-.btn:hover{transform:scale(1.05);}
+/* ================= HERO ================= */
 
 .hero{
 height:100vh;
-background:linear-gradient(to bottom, rgba(0,0,0,.7), #050505),
-url('./coches.jpg');
-background-size:cover;
-background-position:center;
 display:flex;
 align-items:center;
 padding:20px;
+background:linear-gradient(to bottom, rgba(0,0,0,.7), #0b0b0f),
+url('./coches.jpg');
+background-size:cover;
+background-position:center;
 }
+
+h1{font-size:3rem;line-height:1.1;}
+@media(max-width:768px){h1{font-size:2rem;}}
+
+/* ================= CARDS ================= */
 
 .card{
-background:#111;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.1);
 padding:18px;
-border-radius:12px;
-border:1px solid #222;
-text-align:center;
+border-radius:14px;
+backdrop-filter:blur(10px);
 }
 
-.section{
-padding:80px 20px;
-max-width:1100px;
-margin:auto;
-}
+/* ================= GRID ================= */
 
 .grid{
 display:grid;
 gap:15px;
 }
 
-@media(min-width:768px){
 .grid-3{grid-template-columns:repeat(3,1fr);}
 .grid-2{grid-template-columns:repeat(2,1fr);}
+
+@media(max-width:768px){
+.grid-3,.grid-2{grid-template-columns:1fr;}
 }
 
-/* WHATSAPP */
+/* ================= WHATSAPP ================= */
+
 .whatsapp{
 position:fixed;
 bottom:20px;
 right:20px;
-background:#25D366;
 width:60px;
 height:60px;
+background:#25D366;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:25px;
+font-size:26px;
 text-decoration:none;
 }
 
-/* TEXT */
-h1{font-size:3rem; line-height:1.1;}
-h2{font-size:2rem; margin-bottom:20px;}
+/* ================= TIMER ================= */
 
-@media(max-width:768px){
-h1{font-size:2.2rem;}
+#timerBox{
+position:fixed;
+top:90px;
+right:20px;
+background:var(--brand);
+padding:10px 14px;
+border-radius:12px;
 }
+
+/* ================= NOTIF ================= */
+
+#notif{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#111;
+padding:10px;
+border-radius:10px;
+opacity:0;
+transition:.5s;
+}
+
+/* ================= CHAT ================= */
+
+#chat{
+position:fixed;
+bottom:90px;
+right:20px;
+width:260px;
+background:#111;
+border-radius:12px;
+display:none;
+flex-direction:column;
+}
+
+#chatMessages{
+height:180px;
+overflow:auto;
+padding:10px;
+font-size:13px;
+}
+
+.chat-btn{
+background:var(--brand);
+padding:8px;
+text-align:center;
+cursor:pointer;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+padding:80px 20px;
+max-width:1100px;
+margin:auto;
+}
+
+/* ================= EXTRA UI (inspirado estilo premium) ================= */
+
+.glass{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.1);
+border-radius:16px;
+padding:20px;
+}
+
+.small{
+font-size:13px;
+color:#ccc;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<!-- NAV -->
-<nav>
-<div style="display:flex;align-items:center;gap:10px;">
-<img src="./Logo.png" style="height:40px;">
-<strong>tecnibaby</strong>
+<!-- LOADER -->
+<div id="loader">
+<img src="./Logo.png">
+<p>limpiezadecochesdebebe.com</p>
 </div>
 
-<a href="https://wa.me/573172244861" class="btn">Agendar</a>
+<!-- NAV -->
+<nav>
+
+<div style="display:flex;align-items:center;gap:10px;">
+<img src="./Logo.png" style="height:40px;">
+<strong>Tecnibaby</strong>
+</div>
+
+<a class="btn btn-primary" href="https://wa.me/573203480677">
+Agendar
+</a>
+
 </nav>
 
 <!-- HERO -->
@@ -132,15 +271,13 @@ h1{font-size:2.2rem;}
 
 <div style="max-width:600px;">
 
-<h1>
-Limpieza y Desinfección de Coches para Bebé en Medellín
-</h1>
+<h1>Limpieza y desinfección de coches para bebé en Medellín</h1>
 
-<p style="margin:15px 0;color:#ccc;">
-Servicio premium a domicilio que elimina bacterias, suciedad y malos olores en coches de bebé. Protección total para la salud de tu hijo.
+<p class="small">
+Protege la salud de tu bebé eliminando bacterias invisibles con limpieza profesional.
 </p>
 
-<a href="https://wa.me/573172244861" class="btn">
+<a class="btn btn-green" href="https://wa.me/573203480677">
 Agendar por WhatsApp
 </a>
 
@@ -148,53 +285,130 @@ Agendar por WhatsApp
 
 </section>
 
-<!-- SERVICIOS -->
-<section class="section">
+<!-- INTRO -->
+<section>
 
-<h2 style="text-align:center;">Servicios especializados</h2>
+<div class="glass">
+
+<h2>Servicio profesional en Medellín</h2>
+
+<p>
+Realizamos limpieza profunda, desinfección y eliminación de bacterias en coches y sillas para bebé.
+</p>
+
+</div>
+
+</section>
+
+<!-- SERVICIOS -->
+<section>
+
+<h2>Servicios</h2>
 
 <div class="grid grid-3">
 
-<div class="card">Desinfección de coches para bebé</div>
-<div class="card">Limpieza antibacteriana profunda</div>
-<div class="card">Eliminación de malos olores</div>
-<div class="card">Secado seguro profesional</div>
-<div class="card">Servicio a domicilio Medellín</div>
-<div class="card">Cuidado premium infantil</div>
+<div class="card">Desinfección profunda</div>
+<div class="card">Eliminación de bacterias</div>
+<div class="card">Lavado premium</div>
+<div class="card">Secado profesional</div>
+<div class="card">Recogida a domicilio</div>
+<div class="card">Entrega programada</div>
 
 </div>
 
 </section>
 
-<!-- SEO TEXT -->
-<section class="section" style="text-align:center;color:#bbb;max-width:700px;">
+<!-- PROCESO -->
+<section>
 
-<p>
-Somos especialistas en limpieza y desinfección de coches para bebé en Medellín.
-Eliminamos bacterias, ácaros, suciedad y malos olores para garantizar un entorno seguro y saludable para tu bebé.
-</p>
+<h2>Proceso</h2>
 
-</section>
+<div class="grid grid-3">
 
-<!-- BEFORE AFTER -->
-<section class="section">
-
-<h2 style="text-align:center;">Antes / Después</h2>
-
-<div class="grid grid-2">
-
-<img src="./antes.png" style="width:100%;border-radius:12px;">
-<img src="./Despues.png" style="width:100%;border-radius:12px;">
+<div class="card">1. Inspección</div>
+<div class="card">2. Desarme técnico</div>
+<div class="card">3. Limpieza profunda</div>
+<div class="card">4. Desinfección</div>
+<div class="card">5. Secado</div>
+<div class="card">6. Revisión final</div>
 
 </div>
 
 </section>
 
-<!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/573172244861" class="whatsapp">💬</a>
+<!-- PEDIDO -->
+<section>
+
+<h2>Consultar pedido</h2>
+
+<input id="buscar" placeholder="ID pedido"
+style="padding:12px;border-radius:10px;background:black;color:white;border:1px solid #333;">
+
+<button class="btn btn-primary" onclick="buscarPedido()">Buscar</button>
+
+<div id="resultado"></div>
+
+</section>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/573203480677">💬</a>
+
+<!-- TIMER -->
+<div id="timerBox">⏳ <span id="timer">05:00</span></div>
+
+<!-- NOTIF -->
+<div id="notif"></div>
+
+<!-- CHAT -->
+<div id="chat">
+<div id="chatMessages"></div>
+<input id="chatInput" style="padding:10px;">
+<div class="chat-btn" onclick="sendChat()">Enviar</div>
+</div>
+
+<div class="chat-btn" onclick="toggleChat()" style="position:fixed;bottom:20px;right:100px;">🤖</div>
 
 <script>
-gsap.from("h1",{opacity:0,y:50,duration:1});
+
+setTimeout(()=>document.getElementById("loader").style.display="none",1800);
+
+const names=["Juan","Laura","Pedro","Camila"];
+
+setInterval(()=>{
+let n=names[Math.floor(Math.random()*names.length)];
+let el=document.getElementById("notif");
+el.innerText=n+" agendó servicio";
+el.style.opacity=1;
+setTimeout(()=>el.style.opacity=0,3000);
+},6000);
+
+let t=300;
+setInterval(()=>{
+t--;
+let m=Math.floor(t/60);
+let s=t%60;
+document.getElementById("timer").innerText=`${m}:${s<10?'0':''}${s}`;
+},1000);
+
+function buscarPedido(){
+document.getElementById("resultado").innerHTML=
+`<div class="glass">Estado: En proceso - 65%</div>`;
+}
+
+function toggleChat(){
+let c=document.getElementById("chat");
+c.style.display=c.style.display=="flex"?"none":"flex";
+}
+
+function sendChat(){
+let i=document.getElementById("chatInput");
+let m=i.value;
+document.getElementById("chatMessages").innerHTML+=`<p>👤 ${m}</p>`;
+i.value="";
+}
+
+gsap.from("h1",{opacity:0,y:40,duration:1});
+
 </script>
 
 </body>
