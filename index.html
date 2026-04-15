@@ -21,6 +21,19 @@ font-family:'Poppins',sans-serif;
 overflow:hidden;
 }
 
+/* SCROLL CINEMATICO */
+.section{
+min-height:100vh;
+display:flex;
+align-items:center;
+}
+
+/* REVEAL */
+.reveal{
+opacity:0;
+transform:translateY(80px);
+}
+
 /* LOADER */
 #main-loader{
 position:fixed;
@@ -72,7 +85,7 @@ transform:translateY(-3px);
 box-shadow:0 10px 25px rgba(219,39,119,.4);
 }
 
-/* CARDS */
+/* CARD */
 .card{
 background:#0a0a0a;
 border:1px solid rgba(255,255,255,.05);
@@ -82,6 +95,14 @@ transition:.4s;
 .card:hover{
 border-color:var(--brand);
 transform:translateY(-10px);
+}
+
+/* TESTIMONIOS */
+.testimonial{
+background:#0a0a0a;
+border:1px solid rgba(255,255,255,.05);
+padding:20px;
+border-radius:15px;
 }
 
 /* WHATSAPP */
@@ -100,14 +121,6 @@ font-size:30px;
 z-index:999;
 box-shadow:0 10px 30px rgba(37,211,102,.5);
 }
-
-/* TESTIMONIOS */
-.testimonial{
-background:#0a0a0a;
-border:1px solid rgba(255,255,255,.05);
-padding:20px;
-border-radius:15px;
-}
 </style>
 </head>
 
@@ -124,28 +137,24 @@ border-radius:15px;
 <header class="glass-header fixed top-0 w-full py-4 px-6 z-50">
 <div class="flex justify-between items-center max-w-7xl mx-auto">
 
-<div>
 <h1 class="font-black text-xl">tecni<span class="text-pink-600">baby</span></h1>
-</div>
 
-<div class="hidden md:flex items-center gap-6">
-<a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20un%20servicio%20de%20limpieza%20para%20mi%20coche%20o%20silla%20de%20beb%C3%A9" class="btn">Agenda Ahora</a>
-</div>
+<a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20un%20servicio" class="btn">Agenda Ahora</a>
 
 </div>
 </header>
 
 <!-- HERO -->
-<section class="min-h-screen flex items-center px-6 pt-24">
+<section class="section px-6 pt-24">
 <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10">
 
-<div>
+<div class="reveal">
 <h2 class="text-5xl md:text-7xl font-black uppercase">
-Limpieza <span class="text-pink-600">Profesional</span>
+EL ARTE DE LA <span class="text-pink-600">PUREZA</span>
 </h2>
 
 <p class="text-gray-400 mt-6 max-w-md">
-En tecnibaby no solo limpiamos, eliminamos bacterias, ácaros y olores que pueden afectar la salud de tu bebé.
+En tecnibaby no solo limpiamos, restauramos la seguridad biológica del entorno de tu bebé.
 </p>
 
 <!-- CONTADOR -->
@@ -154,32 +163,54 @@ En tecnibaby no solo limpiamos, eliminamos bacterias, ácaros y olores que puede
 <p id="countdown" class="text-2xl font-black text-pink-500"></p>
 </div>
 
-<a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20mi%20servicio%20ahora" class="btn mt-6 inline-block">Agendar Ahora</a>
+<a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20mi%20servicio" class="btn mt-6 inline-block">Agendar Ahora</a>
 </div>
 
-<div>
+<div class="reveal">
 <iframe src="https://www.youtube.com/embed/Fr3Sr3Uc17I"
-class="w-full h-[300px] md:h-[400px] rounded-xl"></iframe>
+class="w-full h-[350px] rounded-xl"></iframe>
 </div>
 
 </div>
 </section>
 
 <!-- PROCESO -->
-<section class="py-20 px-6">
+<section class="py-28 px-6">
 <div class="max-w-7xl mx-auto">
 
-<h3 class="text-4xl font-black mb-12">Proceso</h3>
+<h3 class="text-4xl font-black mb-16 text-center">Proceso Profesional</h3>
 
-<div class="grid md:grid-cols-4 gap-6">
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-<div class="card p-6 rounded-xl"><h4 class="text-pink-600 font-bold">01</h4><p>Diagnóstico</p></div>
-<div class="card p-6 rounded-xl"><h4 class="text-pink-600 font-bold">02</h4><p>Limpieza</p></div>
-<div class="card p-6 rounded-xl"><h4 class="text-pink-600 font-bold">03</h4><p>Vapor</p></div>
-<div class="card p-6 rounded-xl"><h4 class="text-pink-600 font-bold">04</h4><p>UV</p></div>
-
+<div class="card p-6 rounded-xl reveal">
+<h4 class="text-pink-600 font-bold mb-2">01. Diagnóstico técnico</h4>
+<p class="text-gray-400 text-sm">
+Inspeccionamos el estado del coche y registramos cada detalle para un proceso seguro y controlado.
+</p>
 </div>
 
+<div class="card p-6 rounded-xl reveal border-b-2 border-pink-600">
+<h4 class="text-pink-600 font-bold mb-2">🧽 02. Limpieza profunda</h4>
+<p class="text-gray-300 text-sm">
+Limpieza profunda de telas y estructura, mantenimiento de llantas
+</p>
+</div>
+
+<div class="card p-6 rounded-xl reveal">
+<h4 class="text-pink-600 font-bold mb-2">💨 03. Higienización a vapor</h4>
+<p class="text-gray-400 text-sm">
+Aplicamos vapor a alta temperatura que elimina bacterias, ácaros y olores sin químicos agresivos.
+</p>
+</div>
+
+<div class="card p-6 rounded-xl reveal">
+<h4 class="text-pink-600 font-bold mb-2">✨ 04. Desinfección UV-C</h4>
+<p class="text-gray-400 text-sm">
+Tecnología avanzada que elimina microorganismos invisibles, brindando máxima protección.
+</p>
+</div>
+
+</div>
 </div>
 </section>
 
@@ -191,32 +222,32 @@ class="w-full h-[300px] md:h-[400px] rounded-xl"></iframe>
 
 <div class="grid md:grid-cols-3 gap-6">
 
-<div class="testimonial">
+<div class="testimonial reveal">
 <p>"Increíble servicio, quedó como nuevo 🔥"</p>
 <span class="text-pink-500 text-sm">⭐️⭐️⭐️⭐️⭐️ - Laura M</span>
 </div>
 
-<div class="testimonial">
+<div class="testimonial reveal">
 <p>"Se nota la diferencia, súper recomendado"</p>
 <span class="text-pink-500 text-sm">⭐️⭐️⭐️⭐️⭐️ - Andrés R</span>
 </div>
 
-<div class="testimonial">
+<div class="testimonial reveal">
 <p>"Mi bebé ahora está mucho más seguro"</p>
 <span class="text-pink-500 text-sm">⭐️⭐️⭐️⭐️⭐️ - Camila P</span>
 </div>
 
 </div>
-
 </div>
 </section>
 
 <!-- WHATSAPP -->
-<a href="https://wa.me/573203480677?text=Hola%20quiero%20informaci%C3%B3n%20sobre%20el%20servicio" class="whatsapp">
+<a href="https://wa.me/573203480677?text=Hola%20quiero%20informaci%C3%B3n" class="whatsapp">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 
 <script>
+
 // LOADER
 window.addEventListener("load",()=>{
 const tl=gsap.timeline();
@@ -226,18 +257,31 @@ tl.to("#logo",{opacity:1,scale:1,duration:1})
 .to("#scan",{top:"100%",duration:1.5})
 .to("#main-loader",{y:"-100%",duration:.8})
 .to("body",{overflow:"auto"});
+
+// REVEAL
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.utils.toArray(".reveal").forEach((el,i)=>{
+gsap.to(el,{
+scrollTrigger:{trigger:el,start:"top 85%"},
+opacity:1,
+y:0,
+duration:1,
+delay:i*0.1
+});
+});
 });
 
-// CONTADOR (2 horas)
+// CONTADOR
 let time = 7200;
 setInterval(()=>{
 let h = Math.floor(time/3600);
 let m = Math.floor((time%3600)/60);
 let s = time%60;
-document.getElementById("countdown").innerHTML = 
-`${h}h ${m}m ${s}s`;
+document.getElementById("countdown").innerHTML = `${h}h ${m}m ${s}s`;
 time--;
 },1000);
+
 </script>
 
 </body>
