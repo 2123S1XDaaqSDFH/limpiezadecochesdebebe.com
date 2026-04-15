@@ -3,692 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tecnibaby | Limpieza y desinfección profesional para coches y artículos de bebé en Medellín.">
+    <meta name="description" content="tecnibaby | Limpieza y desinfección de coches y sillas de bebé en Medellín. Eliminamos bacterias, ácaros y olores con procesos seguros.">
     <title>tecnibaby | Limpieza y Desinfección Profesional</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            light: "#f472b6",
-                            DEFAULT: "#db2777",
-                            dark: "#9d174d"
-                        },
-                        dark: {
-                            pure: "#050505",
-                            soft: "#0a0a0c",
-                            card: "#121216"
-                        }
-                    },
-                    boxShadow: {
-                        glow: "0 25px 80px rgba(219, 39, 119, 0.25)"
-                    },
-                    animation: {
-                        floaty: "floaty 6s ease-in-out infinite"
+                        brand: { DEFAULT: '#db2777' },
+                        dark: { pure: '#000000', soft: '#080808' }
                     }
                 }
             }
-        };
+        }
     </script>
 
     <style>
-        :root {
-            --brand: #db2777;
-            --bg: #050505;
-            --text-soft: rgba(255, 255, 255, 0.66);
-        }
-
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: var(--brand) #0a0a0c;
-        }
-
-        *::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        *::-webkit-scrollbar-track {
-            background: #0a0a0c;
-        }
-
-        *::-webkit-scrollbar-thumb {
-            background: var(--brand);
-            border-radius: 999px;
-        }
-
-        body {
-            margin: 0;
-            background:
-                radial-gradient(circle at top right, rgba(219, 39, 119, 0.16), transparent 30%),
-                radial-gradient(circle at bottom left, rgba(244, 114, 182, 0.08), transparent 28%),
-                var(--bg);
-            color: #fff;
-            font-family: "Poppins", sans-serif;
-            overflow: hidden;
-        }
-
-        @keyframes floaty {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-14px); }
-        }
-
-        .brand-mark {
-            font-family: "Space Grotesk", sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.06em;
+        :root { --brand: #db2777; }
+        body { background-color: #000; color: #fff; overflow: hidden; font-family: 'Inter', sans-serif; }
+        
+        .tecni-logo {
+            font-family: 'Inter Tight', sans-serif;
+            color: var(--brand);
+            font-weight: 900;
+            letter-spacing: -0.05em;
             text-transform: lowercase;
         }
 
+        #main-loader {
+            position: fixed; inset: 0; background: #000; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .scan-line {
+            width: 100%; height: 2px; background: var(--brand);
+            position: absolute; top: 0; box-shadow: 0 0 25px var(--brand);
+            opacity: 0; z-index: 10;
+        }
+
         .glass-header {
-            background: rgba(5, 5, 5, 0.78);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transform: translateY(-100%);
         }
 
-        .hero-orb,
-        .hero-grid {
-            pointer-events: none;
+        .phase-card {
+            background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative; overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
+        .phase-card:hover { border-color: var(--brand); transform: translateY(-10px); }
 
-        .hero-grid {
-            background-image:
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 80px 80px;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
-        }
-
-        .text-gradient {
-            background: linear-gradient(90deg, #fff 0%, #f472b6 45%, #db2777 70%, #fff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 6s linear infinite;
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
+        .phase-number {
+            position: absolute; top: 10px; right: 20px;
+            font-size: 5rem; font-weight: 900;
+            color: rgba(219, 39, 119, 0.12); line-height: 1; pointer-events: none;
         }
 
         .btn-premium {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            background: linear-gradient(135deg, #db2777, #9d174d);
-            color: #fff;
-            padding: 1rem 1.8rem;
-            border-radius: 1rem;
-            font-size: 0.7rem;
-            font-weight: 900;
-            letter-spacing: 0.32em;
-            text-transform: uppercase;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+            background: var(--brand); padding: 12px 28px; border-radius: 4px;
+            font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px;
+            font-size: 10px; display: inline-block; transition: 0.4s;
         }
-
-        .btn-premium:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 18px 45px rgba(219, 39, 119, 0.35);
-            filter: saturate(1.15);
-        }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 1rem 1.4rem;
-            border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.03);
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.26em;
-            text-transform: uppercase;
-            transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-5px);
-            border-color: rgba(219, 39, 119, 0.55);
-            background: rgba(219, 39, 119, 0.07);
-        }
-
-        .video-shell,
-        .quote-shell,
-        .info-card,
-        .phase-card,
-        .faq-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-        }
-
-        .video-shell {
-            position: relative;
-            border-radius: 2rem;
-            overflow: hidden;
-            min-height: 420px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-        }
-
-        .video-shell iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .phase-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 2rem;
-            min-height: 320px;
-            transition: transform 0.45s ease, border-color 0.45s ease, background 0.45s ease;
-        }
-
-        .phase-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(219, 39, 119, 0.45);
-            background: rgba(219, 39, 119, 0.06);
-        }
-
-        .phase-number {
-            position: absolute;
-            top: 1.2rem;
-            right: 1.5rem;
-            font-size: 4.5rem;
-            line-height: 1;
-            font-weight: 900;
-            color: rgba(219, 39, 119, 0.14);
-        }
-
-        .faq-item {
-            border-radius: 1.5rem;
-            transition: border-color 0.35s ease, background 0.35s ease;
-        }
-
-        .faq-item.active {
-            border-color: rgba(219, 39, 119, 0.42);
-            background: rgba(219, 39, 119, 0.05);
-        }
-
-        .faq-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.45s ease, padding-top 0.45s ease;
-        }
-
-        .faq-item.active .faq-content {
-            max-height: 220px;
-            padding-top: 1rem;
-        }
-
-        #main-loader {
-            position: fixed;
-            inset: 0;
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-        }
-
-        .loader-panel {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .loader-line {
-            position: absolute;
-            left: -15%;
-            top: 0;
-            width: 130%;
-            height: 4px;
-            opacity: 0;
-            background: linear-gradient(90deg, transparent, #fff, var(--brand), #fff, transparent);
-            box-shadow: 0 0 35px rgba(219, 39, 119, 0.8);
-        }
-
-        .loader-text {
-            font-size: 0.72rem;
-            letter-spacing: 0.8em;
-            text-transform: uppercase;
-            color: #27272a;
-            font-weight: 900;
-        }
-
-        @media (max-width: 1024px) {
-            .video-shell {
-                min-height: 320px;
-            }
-        }
+        .btn-premium:hover { box-shadow: 0 0 30px rgba(219, 39, 119, 0.4); transform: scale(1.05); }
 
         @media (max-width: 768px) {
-            .btn-premium,
-            .btn-secondary {
-                width: 100%;
-                letter-spacing: 0.18em;
-            }
-
-            .phase-card {
-                min-height: auto;
-            }
-
-            .phase-number {
-                font-size: 3.4rem;
-            }
+            h1 { font-size: 3rem !important; line-height: 1 !important; }
+            .phase-card { padding: 2rem !important; }
+            .tecni-logo { font-size: 1.6rem; }
         }
     </style>
 </head>
-<body class="opacity-0">
+
+<body class="opacity-0 transition-opacity duration-1000">
+
     <div id="main-loader">
-        <div class="loader-panel">
-            <div id="loader-line" class="loader-line"></div>
-            <div id="loader-logo" class="brand-mark text-5xl md:text-7xl text-brand">tecnibaby</div>
-            <div id="loader-progress" class="h-[2px] w-56 bg-white/10 overflow-hidden rounded-full">
-                <div class="h-full w-0 bg-brand"></div>
+        <div id="scanner" class="scan-line"></div>
+        <div class="flex flex-col items-center relative z-20">
+            <span class="text-4xl tecni-logo mb-6">tecnibaby</span>
+            <div class="w-64 h-[1px] bg-white/10 relative overflow-hidden">
+                <div id="load-bar" class="absolute inset-0 bg-brand w-0"></div>
             </div>
-            <div id="loader-text" class="loader-text">protocolo de limpieza</div>
+            <div class="mt-6 flex flex-col items-center gap-2">
+                <span id="load-percentage" class="text-brand font-black italic text-xl">0%</span>
+                <span class="text-[8px] font-bold uppercase tracking-[0.5em] text-zinc-600 italic">Analizando Protocolo de Salud</span>
+            </div>
         </div>
     </div>
 
-    <header class="glass-header fixed inset-x-0 top-0 z-50 px-6 py-5 md:px-10">
-        <div class="mx-auto flex max-w-[1500px] items-center justify-between">
-            <a href="#inicio" class="group flex items-center gap-4">
-                <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-xl text-brand shadow-glow">
-                    <i class="fa-solid fa-shield-heart"></i>
-                </div>
-                <div class="flex flex-col">
-                    <span class="brand-mark text-3xl leading-none text-white">tecni<span class="text-brand">baby</span></span>
-                    <span class="text-[0.52rem] font-black uppercase tracking-[0.48em] text-zinc-500">Su seguridad primero</span>
-                </div>
-            </a>
-
-            <nav class="hidden items-center gap-8 xl:flex">
-                <a href="#inicio" class="text-[0.64rem] font-black uppercase tracking-[0.35em] text-zinc-400 transition-colors hover:text-brand">Inicio</a>
-                <a href="#etapas" class="text-[0.64rem] font-black uppercase tracking-[0.35em] text-zinc-400 transition-colors hover:text-brand">4 Etapas</a>
-                <a href="#promesa" class="text-[0.64rem] font-black uppercase tracking-[0.35em] text-zinc-400 transition-colors hover:text-brand">Promesa</a>
-                <a href="#faq" class="text-[0.64rem] font-black uppercase tracking-[0.35em] text-zinc-400 transition-colors hover:text-brand">FAQ</a>
-                <a href="https://wa.me/573203480677" target="_blank" rel="noreferrer" class="btn-premium !px-6 !py-3 !text-[0.56rem]">Agendar</a>
+    <header class="fixed top-0 w-full z-50 glass-header py-4 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex flex-col">
+                <span class="text-2xl tecni-logo">tecnibaby</span>
+                <span class="text-[6px] font-bold tracking-[0.4em] text-zinc-500 uppercase mt-1">Coches y Sillas de Bebé</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-10">
+                <a href="#proceso" class="text-[9px] font-black uppercase tracking-widest hover:text-brand transition-colors">4 Etapas</a>
+                <a href="https://wa.me/573203480677" target="_blank" class="btn-premium">WhatsApp</a>
             </nav>
-
-            <a href="https://wa.me/573203480677" target="_blank" rel="noreferrer" class="text-3xl text-brand xl:hidden">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
+            <a href="https://wa.me/573203480677" class="md:hidden text-brand text-2xl"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </header>
 
-    <main class="relative">
-        <section id="inicio" class="relative min-h-screen overflow-hidden px-6 pt-28 md:px-10">
-            <div class="hero-grid absolute inset-0"></div>
-            <div class="hero-orb absolute right-[-10%] top-24 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-[150px]"></div>
-            <div class="hero-orb absolute bottom-0 left-[-5%] h-[24rem] w-[24rem] rounded-full bg-brand-light/10 blur-[140px]"></div>
-
-            <div class="mx-auto grid max-w-[1500px] items-center gap-14 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
-                <div class="relative z-10 space-y-10">
-                    <div class="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2">
-                        <span class="h-2.5 w-2.5 rounded-full bg-brand animate-pulse"></span>
-                        <span class="text-[0.58rem] font-black uppercase tracking-[0.42em] text-zinc-300">Limpieza y desinfección profesional</span>
+    <main>
+        <section class="min-h-screen flex items-center pt-24 px-6 md:px-12 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-10">
+                    <div class="reveal-text inline-flex items-center gap-3 bg-brand/10 border border-brand/20 px-4 py-2 rounded-full">
+                        <span class="text-[8px] font-black uppercase tracking-widest text-brand italic">Limpieza Profesional</span>
                     </div>
+                    
+                    <h1 class="reveal-text text-5xl md:text-[90px] font-black leading-[0.85] tracking-tighter uppercase italic">
+                        MÁXIMA <br> <span class="text-brand">PROTECCIÓN.</span>
+                    </h1>
 
-                    <div class="space-y-6">
-                        <h1 class="max-w-4xl text-5xl font-black uppercase leading-[0.88] md:text-7xl xl:text-[7rem]">
-                            Limpieza <br>
-                            <span class="text-gradient">profesional.</span>
-                        </h1>
-                        <p class="max-w-2xl border-l-2 border-brand pl-6 text-lg leading-relaxed text-zinc-400 md:text-xl">
-                            En <span class="brand-mark text-white">tecnibaby</span> eliminamos bacterias, acaros y olores que pueden afectar la salud de tu bebe.
-                        </p>
-                    </div>
+                    <p class="reveal-text text-zinc-400 text-lg md:text-xl font-light leading-relaxed border-l-2 border-brand pl-8 max-w-lg">
+                        En <span class="tecni-logo">tecnibaby</span> no solo limpiamos, eliminamos bacterias, ácaros y olores que pueden afectar la salud de tu bebé.
+                    </p>
 
-                    <div class="flex flex-col gap-4 sm:flex-row">
-                        <a href="https://wa.me/573203480677" target="_blank" rel="noreferrer" class="btn-premium">
-                            WhatsApp
-                            <i class="fa-brands fa-whatsapp text-base"></i>
-                        </a>
-                        <a href="#etapas" class="btn-secondary">
-                            Ver proceso
-                            <i class="fa-solid fa-arrow-down"></i>
-                        </a>
-                    </div>
-
-                    <div class="grid gap-4 sm:grid-cols-3">
-                        <div class="info-card rounded-[1.5rem] p-5">
-                            <div class="text-3xl font-black italic text-brand">4</div>
-                            <p class="mt-2 text-[0.62rem] font-black uppercase tracking-[0.32em] text-zinc-500">Etapas especializadas</p>
-                        </div>
-                        <div class="info-card rounded-[1.5rem] p-5">
-                            <div class="text-3xl font-black italic text-brand">UV-C</div>
-                            <p class="mt-2 text-[0.62rem] font-black uppercase tracking-[0.32em] text-zinc-500">Desinfeccion avanzada</p>
-                        </div>
-                        <div class="info-card rounded-[1.5rem] p-5">
-                            <div class="text-3xl font-black italic text-brand">100%</div>
-                            <p class="mt-2 text-[0.62rem] font-black uppercase tracking-[0.32em] text-zinc-500">Enfoque en salud y detalle</p>
-                        </div>
+                    <div class="reveal-text pt-6">
+                        <a href="https://wa.me/573203480677" target="_blank" class="btn-premium">Agendar ahora</a>
                     </div>
                 </div>
 
-                <div class="relative z-10">
-                    <div class="absolute -inset-4 rounded-[2.5rem] bg-brand/15 blur-3xl"></div>
-                    <div class="video-shell">
-                        <div class="absolute left-6 top-6 z-10 rounded-full border border-white/10 bg-black/55 px-4 py-2 text-[0.56rem] font-black uppercase tracking-[0.35em] text-zinc-300">
-                            Tecnibaby en accion
-                        </div>
-                        <iframe src="https://www.youtube.com/embed/Fr3Sr3Uc17I?autoplay=0&mute=1&controls=1" title="Tecnibaby video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="relative group">
+                    <div class="absolute -inset-10 bg-brand/10 blur-[100px] rounded-full opacity-40"></div>
+                    <div class="relative bg-zinc-900 p-2 rounded-[3rem] border border-white/10 shadow-3xl overflow-hidden aspect-video">
+                        <iframe src="https://www.youtube.com/embed/Fr3Sr3Uc17I?autoplay=1&mute=1&loop=1&playlist=Fr3Sr3Uc17I" class="w-full h-full object-cover" frameborder="0" allow="autoplay; encrypted-media"></iframe>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="etapas" class="relative border-y border-white/5 bg-dark-soft px-6 py-24 md:px-10 md:py-36">
-            <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/30 to-transparent"></div>
-            <div class="mx-auto max-w-[1500px]">
-                <div class="mb-16 max-w-3xl space-y-5 md:mb-24">
-                    <span class="text-[0.65rem] font-black uppercase tracking-[0.45em] text-zinc-500">Nuestro protocolo</span>
-                    <h2 class="text-4xl font-black uppercase leading-none md:text-6xl xl:text-7xl">
-                        Nuestro proceso en <span class="text-brand">4 etapas</span>
-                    </h2>
-                    <p class="max-w-2xl text-base leading-relaxed text-zinc-400 md:text-lg">
-                        Una estructura visual mas fuerte, sin perder la claridad del mensaje ni el enfoque en seguridad, higiene y detalle.
-                    </p>
+        <section id="proceso" class="py-32 bg-dark-soft px-6 md:px-12">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-24">
+                    <h2 class="text-4xl md:text-7xl font-black italic uppercase tracking-tighter">Nuestro proceso <br> en <span class="text-brand">4 etapas</span></h2>
                 </div>
 
-                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                    <article class="phase-card p-8 md:p-10">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="phase-card p-10 rounded-[2.5rem]">
                         <span class="phase-number">01</span>
-                        <div class="mb-8 flex h-16 w-16 items-center justify-center rounded-[1.4rem] bg-brand/10 text-3xl text-brand">
-                            <i class="fa-solid fa-clipboard-check"></i>
-                        </div>
-                        <h3 class="max-w-[13rem] text-2xl font-black uppercase leading-tight">Diagnostico tecnico</h3>
-                        <p class="mt-5 text-[0.72rem] font-bold uppercase leading-loose tracking-[0.24em] text-zinc-500">
-                            Inspeccionamos el estado del coche y registramos cada detalle para un proceso seguro y controlado.
-                        </p>
-                    </article>
+                        <h3 class="text-xl font-black italic mb-4 text-brand uppercase">Diagnóstico técnico</h3>
+                        <p class="text-[11px] text-zinc-500 font-bold uppercase tracking-widest leading-relaxed">Inspeccionamos el estado del coche y registramos cada detalle para un proceso seguro y controlado.</p>
+                    </div>
 
-                    <article class="phase-card border-b-4 border-brand p-8 md:p-10">
+                    <div class="phase-card p-10 rounded-[2.5rem] border-b-4 border-brand">
                         <span class="phase-number">02</span>
-                        <div class="mb-8 flex h-16 w-16 items-center justify-center rounded-[1.4rem] bg-brand/10 text-3xl text-brand">
-                            <i class="fa-solid fa-soap"></i>
-                        </div>
-                        <h3 class="max-w-[13rem] text-2xl font-black uppercase leading-tight text-brand">Limpieza profunda</h3>
-                        <p class="mt-5 text-[0.72rem] font-bold uppercase leading-loose tracking-[0.24em] text-zinc-300">
-                            Limpieza profunda de telas,estructura Y mantenimiento de llantas
-                        </p>
-                    </article>
+                        <h3 class="text-xl font-black italic mb-4 text-brand uppercase">Limpieza profunda</h3>
+                        <p class="text-[11px] text-zinc-300 font-bold uppercase tracking-widest leading-relaxed">🧽 Limpieza profunda de telas y estructura, mantenimiento de llantas.</p>
+                    </div>
 
-                    <article class="phase-card p-8 md:p-10">
+                    <div class="phase-card p-10 rounded-[2.5rem]">
                         <span class="phase-number">03</span>
-                        <div class="mb-8 flex h-16 w-16 items-center justify-center rounded-[1.4rem] bg-brand/10 text-3xl text-brand">
-                            <i class="fa-solid fa-wind"></i>
-                        </div>
-                        <h3 class="max-w-[13rem] text-2xl font-black uppercase leading-tight">Higienizacion</h3>
-                        <p class="mt-5 text-[0.72rem] font-bold uppercase leading-loose tracking-[0.24em] text-zinc-500">
-                            Aplicamos vapor a alta temperatura que elimina bacterias, acaros y olores sin quimicos agresivos.
-                        </p>
-                    </article>
+                        <h3 class="text-xl font-black italic mb-4 text-brand uppercase">Higienización a vapor</h3>
+                        <p class="text-[11px] text-zinc-500 font-bold uppercase tracking-widest leading-relaxed">💨 Aplicamos vapor a alta temperatura que elimina bacterias, ácaros y olores sin químicos agresivos.</p>
+                    </div>
 
-                    <article class="phase-card p-8 md:p-10">
+                    <div class="phase-card p-10 rounded-[2.5rem]">
                         <span class="phase-number">04</span>
-                        <div class="mb-8 flex h-16 w-16 items-center justify-center rounded-[1.4rem] bg-brand/10 text-3xl text-brand">
-                            <i class="fa-solid fa-shield-virus"></i>
-                        </div>
-                        <h3 class="max-w-[13rem] text-2xl font-black uppercase leading-tight">Desinfeccion UV-C</h3>
-                        <p class="mt-5 text-[0.72rem] font-bold uppercase leading-loose tracking-[0.24em] text-zinc-500">
-                            Tecnologia avanzada que elimina microorganismos invisibles, brindando maxima proteccion.
-                        </p>
-                    </article>
+                        <h3 class="text-xl font-black italic mb-4 text-brand uppercase">Desinfección UV-C</h3>
+                        <p class="text-[11px] text-zinc-500 font-bold uppercase tracking-widest leading-relaxed">✨ Tecnología avanzada que elimina microorganismos invisibles, brindando máxima protección.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="promesa" class="px-6 py-24 md:px-10 md:py-32">
-            <div class="mx-auto max-w-[1200px]">
-                <div class="quote-shell rounded-[2.5rem] px-8 py-14 text-center md:px-16 md:py-20">
-                    <div class="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-brand/10 text-2xl text-brand animate-floaty">
-                        <i class="fa-solid fa-heart-circle-check"></i>
-                    </div>
-                    <p class="mx-auto max-w-4xl text-2xl font-light leading-relaxed text-zinc-200 md:text-4xl">
-                        "En <span class="brand-mark text-white">tecnibaby</span> aplicamos procesos especializados.
-                        <span class="font-black text-brand">No improvisamos.</span>
-                        No usamos productos agresivos. Trabajamos con enfoque en salud, seguridad y detalle."
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="bg-dark-soft px-6 py-24 md:px-10 md:py-32">
-            <div class="mx-auto max-w-[1000px]">
-                <div class="mb-12 text-center md:mb-16">
-                    <span class="text-[0.65rem] font-black uppercase tracking-[0.45em] text-zinc-500">Resolvemos tus dudas</span>
-                    <h2 class="mt-4 text-4xl font-black uppercase md:text-5xl">Dudas <span class="text-brand">frecuentes</span></h2>
-                </div>
-
-                <div class="space-y-5">
-                    <div class="faq-item px-6 py-6 md:px-8">
-                        <button class="faq-toggle flex w-full items-center justify-between gap-6 text-left" type="button">
-                            <span class="text-sm font-black uppercase tracking-[0.28em] md:text-base">Cuanto tarda el proceso?</span>
-                            <i class="fa-solid fa-plus text-brand transition-transform duration-300"></i>
-                        </button>
-                        <div class="faq-content">
-                            <p class="pr-10 text-sm leading-relaxed text-zinc-400 md:text-base">
-                                Nuestro proceso tarda 3 dias Dependiendo del nivel de suciedad y tipos de accesorios.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item px-6 py-6 md:px-8">
-                        <button class="faq-toggle flex w-full items-center justify-between gap-6 text-left" type="button">
-                            <span class="text-sm font-black uppercase tracking-[0.28em] md:text-base">Tienen punto fisico?</span>
-                            <i class="fa-solid fa-plus text-brand transition-transform duration-300"></i>
-                        </button>
-                        <div class="faq-content">
-                            <p class="pr-10 text-sm leading-relaxed text-zinc-400 md:text-base">
-                                Estamos en Medellin. Ofrecemos recogida y entrega con costo adicional.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        <section class="py-32 px-6 bg-black text-center">
+            <div class="max-w-5xl mx-auto">
+                <p class="text-2xl md:text-5xl italic font-light leading-tight text-zinc-200">
+                    “Limpieza y desinfección de coches y sillas de bebé en Medellín. Eliminamos bacterias, ácaros y olores con procesos seguros.”
+                </p>
             </div>
         </section>
     </main>
 
-    <footer class="border-t border-white/5 bg-black px-6 py-16 md:px-10 md:py-20">
-        <div class="mx-auto grid max-w-[1500px] gap-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
-            <div class="space-y-6">
-                <div>
-                    <span class="brand-mark text-4xl text-white">tecni<span class="text-brand">baby</span></span>
-                    <p class="mt-4 max-w-md text-[0.72rem] font-bold uppercase leading-loose tracking-[0.28em] text-zinc-500">
-                        Limpieza y desinfeccion profesional con enfoque en salud, seguridad y detalle.
-                    </p>
-                </div>
-                <div class="flex gap-5 text-xl text-zinc-500">
-                    <a href="https://facebook.com/tecnibaby" target="_blank" rel="noreferrer" class="transition-colors hover:text-brand"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/tecnibaby" target="_blank" rel="noreferrer" class="transition-colors hover:text-brand"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://youtube.com/@tecnibaby" target="_blank" rel="noreferrer" class="transition-colors hover:text-brand"><i class="fa-brands fa-youtube"></i></a>
-                </div>
-            </div>
-
-            <div class="space-y-5">
-                <h3 class="text-[0.72rem] font-black uppercase tracking-[0.4em] text-white">Secciones</h3>
-                <div class="flex flex-col gap-4 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-zinc-500">
-                    <a href="#inicio" class="transition-colors hover:text-brand">Inicio</a>
-                    <a href="#etapas" class="transition-colors hover:text-brand">4 etapas</a>
-                    <a href="#promesa" class="transition-colors hover:text-brand">Promesa</a>
-                    <a href="#faq" class="transition-colors hover:text-brand">FAQ</a>
-                </div>
-            </div>
-
-            <div class="space-y-5">
-                <h3 class="text-[0.72rem] font-black uppercase tracking-[0.4em] text-white">Contacto</h3>
-                <div class="flex flex-col gap-4 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-zinc-500">
-                    <a href="https://wa.me/573203480677" target="_blank" rel="noreferrer" class="transition-colors hover:text-brand">+57 320 348 0677</a>
-                    <span>Medellin, Antioquia</span>
-                    <span>Su seguridad primero</span>
-                </div>
-            </div>
+    <footer class="py-20 border-t border-white/5 px-6 text-center bg-black">
+        <span class="text-5xl tecni-logo">tecnibaby</span>
+        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.5em] mt-8">Coches y Sillas de Bebé en Medellín</p>
+        <div class="flex justify-center gap-10 mt-10 text-zinc-700 text-2xl">
+            <a href="https://instagram.com/tecnibaby" target="_blank" class="hover:text-brand transition-all"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com/tecnibaby" target="_blank" class="hover:text-brand transition-all"><i class="fa-brands fa-facebook-f"></i></a>
         </div>
-
-        <div class="mx-auto mt-12 max-w-[1500px] border-t border-white/5 pt-8 text-[0.62rem] font-black uppercase tracking-[0.42em] text-zinc-700">
-            © 2026 tecnibaby | By JOEX SYSTEMS
-        </div>
+        <p class="text-[8px] text-zinc-800 font-black tracking-widest mt-16 italic uppercase">© 2026 tecnibaby |By JOEX SYSTEMS</p>
     </footer>
 
-    <a href="https://wa.me/573203480677" target="_blank" rel="noreferrer" class="fixed bottom-8 right-8 z-[100] flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-3xl text-white shadow-[0_20px_60px_rgba(37,211,102,0.35)] transition-transform duration-300 hover:scale-110">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-
     <script>
-        window.addEventListener("load", () => {
-            const body = document.body;
-            const loader = document.getElementById("main-loader");
-            const loaderLogo = document.getElementById("loader-logo");
-            const loaderLine = document.getElementById("loader-line");
-            const loaderBar = document.querySelector("#loader-progress div");
-            const loaderText = document.getElementById("loader-text");
-            const header = document.querySelector(".glass-header");
-            const faqItems = document.querySelectorAll(".faq-item");
-
-            const revealPage = () => {
-                body.style.overflow = "auto";
-                gsap.to(body, { opacity: 1, duration: 0.45, ease: "power2.out" });
-                gsap.to(header, { y: 0, duration: 0.7, ease: "expo.out" });
-                initScrollAnims();
-            };
-
+        window.addEventListener('load', () => {
             const failsafe = setTimeout(() => {
-                loader.style.display = "none";
-                revealPage();
-            }, 2200);
+                document.body.style.opacity = "1";
+                document.getElementById('main-loader').style.display = 'none';
+                document.body.style.overflow = "auto";
+            }, 2500);
 
-            if (typeof gsap === "undefined") {
-                return;
-            }
+            if (typeof gsap !== 'undefined') {
+                clearTimeout(failsafe);
+                const tl = gsap.timeline();
 
-            clearTimeout(failsafe);
-
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    loader.style.display = "none";
-                    revealPage();
-                }
-            });
-
-            tl.fromTo(loaderLogo,
-                { opacity: 0, scale: 0.85, y: 30 },
-                { opacity: 1, scale: 1, y: 0, duration: 1.15, ease: "expo.out" }
-            )
-            .to(loaderLine, { opacity: 1, duration: 0.3 }, "-=0.5")
-            .to(loaderLine, { top: "100%", duration: 1.55, ease: "power2.inOut" }, "-=0.1")
-            .to(loaderBar, { width: "100%", duration: 1.35, ease: "power2.out" }, "-=1.35")
-            .to(loaderText, { color: "#db2777", letterSpacing: "1em", duration: 1.2 }, "-=1.1")
-            .to(loader, { y: "-100%", duration: 0.8, ease: "expo.inOut" }, "-=0.1");
-
-            faqItems.forEach((item) => {
-                const button = item.querySelector(".faq-toggle");
-                const icon = item.querySelector("i");
-
-                button.addEventListener("click", () => {
-                    const isActive = item.classList.contains("active");
-
-                    faqItems.forEach((faq) => {
-                        faq.classList.remove("active");
-                        faq.querySelector("i").style.transform = "rotate(0deg)";
-                    });
-
-                    if (!isActive) {
-                        item.classList.add("active");
-                        icon.style.transform = "rotate(45deg)";
-                    }
-                });
-            });
-
-            function initScrollAnims() {
-                if (typeof ScrollTrigger === "undefined") {
-                    return;
-                }
+                tl.to("#scanner", { opacity: 1, top: "100%", duration: 1.5, ease: "power2.inOut" })
+                  .to("#load-bar", { width: "100%", duration: 1.5, ease: "power2.inOut" }, "-=1.5")
+                  .to("#load-percentage", { 
+                        innerText: 100, duration: 1.5, snap: { innerText: 1 },
+                        onUpdate: function() { document.getElementById("load-percentage").innerHTML = Math.ceil(this.targets()[0].innerText) + "%"; }
+                  }, "-=1.5")
+                  .to("#main-loader", { y: "-100%", duration: 0.8, ease: "expo.inOut" })
+                  .to("body", { opacity: 1, overflow: "auto", duration: 0.5 })
+                  .to(".glass-header", { translateY: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
+                  .to(".reveal-text", { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }, "-=0.2");
 
                 gsap.registerPlugin(ScrollTrigger);
-
-                gsap.from("#inicio h1", {
-                    opacity: 0,
-                    x: -80,
-                    duration: 1.1,
-                    ease: "expo.out"
-                });
-
-                gsap.from("#inicio p, #inicio .info-card, #inicio .btn-premium, #inicio .btn-secondary", {
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.9,
-                    stagger: 0.12,
-                    delay: 0.2,
-                    ease: "power3.out"
-                });
-
-                gsap.from(".video-shell", {
-                    opacity: 0,
-                    scale: 0.92,
-                    duration: 1.1,
-                    delay: 0.15,
-                    ease: "expo.out"
-                });
-
-                gsap.utils.toArray(".phase-card").forEach((card, index) => {
+                gsap.utils.toArray('.phase-card').forEach((card, i) => {
                     gsap.from(card, {
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top 85%"
-                        },
-                        opacity: 0,
-                        y: 70,
-                        duration: 0.95,
-                        delay: index * 0.08,
-                        ease: "power3.out"
+                        scrollTrigger: { trigger: card, start: "top 90%" },
+                        opacity: 0, y: 50, duration: 0.8, delay: i * 0.1
                     });
-                });
-
-                gsap.from(".quote-shell", {
-                    scrollTrigger: {
-                        trigger: ".quote-shell",
-                        start: "top 80%"
-                    },
-                    opacity: 0,
-                    y: 45,
-                    duration: 1,
-                    ease: "power3.out"
-                });
-
-                gsap.from(".faq-item", {
-                    scrollTrigger: {
-                        trigger: "#faq",
-                        start: "top 70%"
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8,
-                    stagger: 0.12,
-                    ease: "power2.out"
                 });
             }
         });
-
-        console.log("%c TECNIBABY / REFINED LANDING EXPERIENCE ", "background:#db2777;color:#fff;padding:10px 14px;font-weight:900;border-radius:6px;");
     </script>
 </body>
 </html>
