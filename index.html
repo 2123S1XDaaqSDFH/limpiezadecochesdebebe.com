@@ -1,344 +1,522 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO -->
-<title>Limpieza de coches de bebé en Medellín | tecnibaby</title>
+    <title>tecnibaby | Premium Detailing Baby Cars Medellín</title>
+    <meta name="description" content="tecnibaby - Especialistas en Detailing y desinfección de coches para bebés en Medellín. Eliminamos el 99.9% de bacterias, ácaros y olores con tecnología UV-C.">
+    <meta name="keywords" content="lavado de coches de bebe, medellín, limpieza bebes, desinfección, detailing baby cars, tecnibaby">
+    
+    <meta name="geo.region" content="CO-ANT">
+    <meta name="geo.placename" content="Medellín">
+    <meta name="geo.position" content="6.2442;-75.5812">
+    <link rel="icon" href="./Logo.png">
 
-<meta name="description" content="Limpieza y desinfección de coches y sillas de bebé en Medellín. Eliminamos bacterias, ácaros y olores con vapor y tecnología UV-C. Agenda por WhatsApp.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "tecnibaby",
+        "telephone": "+573203480677",
+        "url": "https://tecnibaby.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Medellín",
+            "addressRegion": "Antioquia",
+            "addressCountry": "CO"
+        },
+        "description": "Limpieza y desinfección premium de coches de bebé en Medellín."
+    }
+    </script>
 
-<meta name="keywords" content="limpieza coche bebe medellin, limpiar silla bebe medellin, desinfeccion coche bebe, tecnibaby medellin">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-<meta name="geo.region" content="CO-ANT">
-<meta name="geo.placename" content="Medellín">
-<meta name="geo.position" content="6.2442;-75.5812">
+    <style>
+        :root { 
+            --brand: #db2777; 
+            --brand-dark: #9d174d;
+            --bg-dark: #000000;
+            --card-bg: #0a0a0a;
+            --text-gray: #a1a1aa;
+        }
 
-<!-- GOOGLE STRUCTURED DATA -->
-<script type="application/ld+json">
-{
-"@context": "https://schema.org",
-"@type": "LocalBusiness",
-"name": "tecnibaby",
-"telephone": "+573203480677",
-"address": {
-"@type": "PostalAddress",
-"addressLocality": "Medellín",
-"addressRegion": "Antioquia",
-"addressCountry": "CO"
-}
-}
-</script>
+        /* RESET & BASE */
+        * { cursor: default; }
+        body { 
+            background-color: var(--bg-dark); 
+            color: #fff; 
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            overflow-y: hidden; /* Controlado por el Loader */
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        /* TIPOGRAFÍA ESPECIAL */
+        .tecni-logo {
+            font-family: 'Inter Tight', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-transform: lowercase;
+        }
 
-<style>
-:root { --brand:#db2777; }
+        .heading-xl {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+        }
 
-body{
-background:#000;
-color:#fff;
-font-family:'Poppins',sans-serif;
-overflow:hidden;
-}
+        /* LOADER CINEMATOGRÁFICO */
+        #main-loader {
+            position: fixed; inset: 0; background: var(--bg-dark); z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .scan-line {
+            width: 100%; height: 4px; background: linear-gradient(90deg, transparent, var(--brand), transparent);
+            position: absolute; top: 0; box-shadow: 0 0 30px var(--brand);
+            opacity: 0;
+        }
 
-/* LOADER */
-#main-loader{
-position:fixed;
-inset:0;
-background:#000;
-z-index:9999;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-}
+        /* HEADER & NAV */
+        .glass-header {
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transform: translateY(-100%); transition: 0.5s;
+        }
 
-.loader-logo{
-width:220px;
-opacity:0;
-transform:scale(.8);
-}
+        /* BOTONES PREMIUM */
+        .btn-premium {
+            background: var(--brand); padding: 16px 36px; border-radius: 12px;
+            font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
+            font-size: 12px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block; color: white; border: 1px solid transparent;
+        }
+        .btn-premium:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 40px rgba(219, 39, 119, 0.4);
+            border-color: rgba(255,255,255,0.2);
+        }
 
-.scan-bar{
-position:absolute;
-top:0;
-left:-10%;
-width:120%;
-height:4px;
-background:linear-gradient(90deg,transparent,#fff,var(--brand),#fff,transparent);
-opacity:0;
-}
+        /* CARDS & CONTENEDORES */
+        .glass-card {
+            background: var(--card-bg); 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px; padding: 40px;
+            transition: 0.4s ease;
+        }
+        .glass-card:hover {
+            border-color: var(--brand);
+            transform: translateY(-10px);
+            background: #0f0f0f;
+        }
 
-/* HEADER */
-.glass-header{
-background:rgba(0,0,0,.85);
-backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(255,255,255,.05);
-}
+        /* EFECTO ANTES/DESPUÉS SCANNER */
+        .clean-box {
+            position: relative; overflow: hidden; border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .clean-overlay {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.85);
+            border-right: 3px solid var(--brand);
+            z-index: 2;
+        }
 
-/* BOTON */
-.btn{
-background:var(--brand);
-padding:14px 28px;
-border-radius:12px;
-font-size:12px;
-font-weight:900;
-letter-spacing:2px;
-transition:.3s;
-}
+        /* ANIMACIÓN FLOTANTE */
+        .float-anim {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
 
-.btn:hover{
-transform:translateY(-5px);
-box-shadow:0 15px 35px rgba(219,39,119,.5);
-}
+        /* WHATSAPP FLOAT */
+        .whatsapp-btn {
+            position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px;
+            background: #25D366; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 35px; z-index: 999;
+            box-shadow: 0 15px 45px rgba(37, 211, 102, 0.3);
+            transition: 0.3s;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1) rotate(10deg); }
 
-/* SCROLL */
-.section{
-min-height:100vh;
-display:flex;
-align-items:center;
-}
-
-.reveal{
-opacity:0;
-transform:translateY(80px);
-}
-
-/* LIMPIEZA EFECTO */
-.clean-box{
-position:relative;
-overflow:hidden;
-border-radius:20px;
-}
-
-.clean-overlay{
-position:absolute;
-inset:0;
-background:#000;
-}
-
-/* CARDS */
-.card{
-background:#0a0a0a;
-border:1px solid rgba(255,255,255,.05);
-padding:20px;
-border-radius:15px;
-transition:.4s;
-}
-
-.card:hover{
-border-color:var(--brand);
-transform:translateY(-10px);
-}
-
-/* TESTIMONIOS */
-.testimonial{
-background:#0a0a0a;
-border:1px solid rgba(255,255,255,.05);
-padding:20px;
-border-radius:15px;
-}
-
-/* WHATSAPP */
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-width:65px;
-height:65px;
-background:#25D366;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:30px;
-z-index:999;
-box-shadow:0 10px 30px rgba(37,211,102,.5);
-}
-</style>
+        /* SECCIONES EXTENDIDAS CSS */
+        .section-padding { padding: 120px 24px; }
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 24px 0; }
+        
+        /* SCROLLBAR CUSTOM */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+    </style>
 </head>
 
-<body>
+<body class="opacity-0">
 
-<!-- LOADER -->
-<div id="main-loader">
-<div class="scan-bar" id="scan"></div>
-<img src="./Logo.png" class="loader-logo" id="logo">
-<p class="mt-6 text-xs tracking-[0.5em] text-gray-500">Bienvenido</p>
-</div>
+    <div id="main-loader">
+        <div id="scanner" class="scan-line"></div>
+        <div class="flex flex-col items-center">
+            <span class="text-5xl tecni-logo text-brand mb-8" id="loader-text">tecnibaby</span>
+            <div class="w-80 h-1 bg-white/5 relative rounded-full overflow-hidden">
+                <div id="progress-fill" class="absolute inset-0 bg-brand w-0"></div>
+            </div>
+            <p class="mt-8 text-[9px] font-bold uppercase tracking-[0.8em] text-zinc-500 italic animate-pulse">Iniciando Protocolo de Higiene</p>
+        </div>
+    </div>
 
-<!-- HEADER -->
-<header class="glass-header fixed top-0 w-full py-4 px-6 z-50">
-<div class="flex justify-between max-w-7xl mx-auto">
-<h1 class="font-black text-xl">tecni<span class="text-pink-600">baby</span></h1>
-<a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20un%20servicio" class="btn">Agenda Ahora</a>
-</div>
-</header>
+    <header class="fixed top-0 w-full z-50 glass-header py-5 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex flex-col">
+                <span class="text-3xl tecni-logo text-white">tecni<span class="text-brand">baby</span></span>
+                <span class="text-[7px] font-black tracking-[0.4em] text-zinc-500 uppercase">Premium Detailing | Medellín</span>
+            </div>
+            
+            <nav class="hidden lg:flex items-center gap-12">
+                <a href="#inicio" class="text-[10px] font-bold uppercase tracking-widest hover:text-brand transition-colors">Inicio</a>
+                <a href="#proceso" class="text-[10px] font-bold uppercase tracking-widest hover:text-brand transition-colors">Procesos</a>
+                <a href="#nosotros" class="text-[10px] font-bold uppercase tracking-widest hover:text-brand transition-colors">Nosotros</a>
+                <a href="#blog" class="text-[10px] font-bold uppercase tracking-widest hover:text-brand transition-colors">Salud</a>
+                <a href="https://wa.me/573203480677" target="_blank" class="btn-premium">Agenda Ahora</a>
+            </nav>
 
-<!-- HERO -->
-<section class="section px-6 pt-24">
-<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10">
+            <button class="lg:hidden text-white text-2xl"><i class="fa-solid fa-bars-staggered"></i></button>
+        </div>
+    </header>
 
-<div class="reveal">
-<h2 class="text-5xl md:text-7xl font-black uppercase">
-Limpieza <span class="text-pink-600">Profesional</span>
-</h2>
+    <main>
+        <section id="inicio" class="min-h-screen flex items-center pt-20 px-6 relative overflow-hidden">
+            <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand/10 blur-[150px] rounded-full"></div>
+            
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+                <div class="reveal space-y-10">
+                    <div class="inline-flex items-center gap-4 bg-white/5 border border-white/10 px-6 py-2 rounded-full">
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-brand"></span>
+                        </span>
+                        <span class="text-[9px] font-black uppercase tracking-widest text-zinc-300">Servicio Disponible en Medellín</span>
+                    </div>
 
-<p class="text-gray-400 mt-6 max-w-md">
-En tecnibaby no solo limpiamos, eliminamos bacterias, ácaros y olores que pueden afectar la salud de tu bebé
-</p>
+                    <h1 class="heading-xl text-6xl md:text-[95px] italic uppercase tracking-tighter">
+                        HIGIENE <br> <span class="text-brand">TOTAL.</span>
+                    </h1>
 
-<div class="mt-6 bg-pink-600/10 border border-pink-600/30 p-4 rounded-lg">
-<p>⏳ Promoción termina en:</p>
-<p id="countdown" class="text-2xl text-pink-500 font-black"></p>
-</div>
+                    <p class="text-zinc-400 text-lg md:text-xl font-light leading-relaxed border-l-2 border-brand pl-8 max-w-lg">
+                        Especialistas en Detailing y desinfección de coches para bebés. Eliminamos el <span class="text-white font-bold italic">99.9% de bacterias</span> para proteger lo que más amas.
+                    </p>
 
-<a href="https://wa.me/573203480677?text=Hola%20quiero%20agendar%20mi%20servicio" class="btn mt-6 inline-block">
-Agendar Ahora
-</a>
-</div>
+                    <div class="bg-zinc-900/80 border border-white/5 p-8 rounded-[2rem] inline-block shadow-2xl backdrop-blur-md">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-bolt-lightning text-brand"></i>
+                            <p class="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Promoción de Apertura:</p>
+                        </div>
+                        <p id="countdown" class="text-4xl text-brand font-black italic tracking-tighter tabular-nums"></p>
+                    </div>
 
-<div class="clean-box reveal">
-<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348" class="rounded-xl">
-<div class="clean-overlay" id="cleanEffect"></div>
-</div>
+                    <div class="flex flex-wrap gap-6 pt-4">
+                        <a href="https://wa.me/573203480677" class="btn-premium italic">Quiero el servicio</a>
+                        <a href="#proceso" class="px-10 py-4 text-[11px] font-black uppercase tracking-widest border border-white/10 rounded-xl hover:bg-white/5 transition-all flex items-center gap-3">
+                            Ver procesos <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
 
-</div>
-</section>
+                <div class="relative group reveal float-anim">
+                    <div class="absolute -inset-10 bg-brand/20 blur-[120px] rounded-full opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                    <div class="clean-box relative z-10 shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] aspect-video">
+                        <iframe src="https://www.youtube.com/embed/Fr3Sr3Sr3Uc17I?autoplay=1&mute=1&loop=1&playlist=Fr3Sr3Uc17I&controls=0" 
+                                class="absolute inset-0 w-full h-full object-cover scale-105" 
+                                frameborder="0" allow="autoplay; encrypted-media"></iframe>
+                        <div class="clean-overlay" id="heroScanner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- PROCESO -->
-<section class="py-20 px-6">
-<div class="max-w-7xl mx-auto">
-<h3 class="text-4xl font-black mb-12 text-center">Nuestro proceso en 4 etapas</h3>
+        <section id="nosotros" class="section-padding bg-zinc-950">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+                <div class="reveal">
+                    <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-8">Sobre <span class="text-brand">Nosotros</span></h2>
+                    <div class="space-y-6 text-zinc-400 text-lg leading-relaxed font-light">
+                        <p>Servicio profesional de limpieza, desinfección y tapizado de coches y sillas para bebé en Medellín y área metropolitana.</p>
+                        <p>En <span class="tecni-logo text-white italic">tecnibaby</span>, entendemos que el coche de tu bebé no es solo un objeto, es su espacio de seguridad. Por eso usamos productos <span class="text-white underline decoration-brand underline-offset-4">100% seguros para bebés</span> y tecnología de punta.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8 mt-12">
+                        <div class="border-t border-white/5 pt-6">
+                            <span class="text-4xl font-black text-white italic">500+</span>
+                            <p class="text-[10px] text-zinc-500 uppercase tracking-[0.3em] mt-2">Coches Limpios</p>
+                        </div>
+                        <div class="border-t border-white/5 pt-6">
+                            <span class="text-4xl font-black text-white italic">100%</span>
+                            <p class="text-[10px] text-zinc-500 uppercase tracking-[0.3em] mt-2">Seguridad</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348" class="rounded-3xl w-full h-80 object-cover" alt="Detalle limpieza">
+                    <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4" class="rounded-3xl w-full h-80 object-cover mt-12" alt="Bebé seguro">
+                </div>
+            </div>
+        </section>
 
-<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section id="proceso" class="section-padding relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-24 reveal">
+                    <h3 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">Nuestros <span class="text-brand">Procesos</span></h3>
+                    <p class="text-zinc-500 uppercase tracking-[0.4em] text-[10px] font-bold">Protocolo Técnico Estándar</p>
+                </div>
 
-<div class="card reveal">
-<h4 class="text-pink-600 font-bold">01. Diagnóstico técnico</h4>
-<p class="text-gray-400 text-sm">
-Inspeccionamos el estado del coche y registramos cada detalle para un proceso seguro y controlado.
-</p>
-</div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-card reveal">
+                        <span class="text-6xl font-black text-white/5 italic absolute top-4 right-8">01</span>
+                        <div class="w-16 h-16 bg-brand/10 flex items-center justify-center rounded-2xl mb-8">
+                            <i class="fa-solid fa-magnifying-glass text-brand text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold uppercase tracking-widest mb-4">Diagnóstico</h4>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Evaluamos el estado del material y tipo de manchas. Registro fotográfico inicial completo.</p>
+                    </div>
 
-<div class="card reveal">
-<h4 class="text-pink-600 font-bold">🧽 02. Limpieza profunda</h4>
-<p class="text-gray-300 text-sm">
-Limpieza profunda de telas y estructura, mantenimiento de llantas
-</p>
-</div>
+                    <div class="glass-card reveal border-b-4 border-brand">
+                        <span class="text-6xl font-black text-white/5 italic absolute top-4 right-8">02</span>
+                        <div class="w-16 h-16 bg-brand/10 flex items-center justify-center rounded-2xl mb-8">
+                            <i class="fa-solid fa-screwdriver-wrench text-brand text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold uppercase tracking-widest mb-4">Desmontaje</h4>
+                        <p class="text-zinc-500 text-sm leading-relaxed italic">Separamos cada pieza textil para un lavado profundo de raíz y acceso a la estructura interna.</p>
+                    </div>
 
-<div class="card reveal">
-<h4 class="text-pink-600 font-bold">💨 03. Higienización a vapor</h4>
-<p class="text-gray-400 text-sm">
-Aplicamos vapor a alta temperatura que elimina bacterias, ácaros y olores sin químicos agresivos.
-</p>
-</div>
+                    <div class="glass-card reveal">
+                        <span class="text-6xl font-black text-white/5 italic absolute top-4 right-8">03</span>
+                        <div class="w-16 h-16 bg-brand/10 flex items-center justify-center rounded-2xl mb-8">
+                            <i class="fa-solid fa-wind text-brand text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold uppercase tracking-widest mb-4">Tratamiento</h4>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Lavado, vaporización a alta temperatura y eliminación de olores persistentes.</p>
+                    </div>
 
-<div class="card reveal">
-<h4 class="text-pink-600 font-bold">✨ 04. Desinfección UV-C</h4>
-<p class="text-gray-400 text-sm">
-Tecnología avanzada que elimina microorganismos invisibles, brindando máxima protección.
-</p>
-</div>
+                    <div class="glass-card reveal">
+                        <span class="text-6xl font-black text-white/5 italic absolute top-4 right-8">04</span>
+                        <div class="w-16 h-16 bg-brand/10 flex items-center justify-center rounded-2xl mb-8">
+                            <i class="fa-solid fa-shield-virus text-brand text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold uppercase tracking-widest mb-4">Control</h4>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Inspección de calidad final, desinfección UV-C y entrega sellada en empaque protector.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-</div>
-</div>
-</section>
+        <section id="blog" class="section-padding bg-zinc-950">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8 reveal">
+                    <div>
+                        <h3 class="text-4xl font-black italic uppercase tracking-tighter mb-4">Blog de <span class="text-brand">Salud</span></h3>
+                        <p class="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">Cuidando el entorno de tu bebé</p>
+                    </div>
+                    <a href="https://wa.me/573203480677" class="text-brand font-black uppercase tracking-widest text-[11px] border-b border-brand pb-2">Ver más consejos</a>
+                </div>
 
-<!-- TESTIMONIOS -->
-<section class="py-20 px-6">
-<div class="max-w-7xl mx-auto">
-<h3 class="text-4xl font-black mb-12 text-center">Opiniones reales</h3>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="group reveal">
+                        <div class="overflow-hidden rounded-3xl mb-8 border border-white/5">
+                            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" alt="Bacterias">
+                        </div>
+                        <span class="text-brand font-black text-[9px] uppercase tracking-[0.3em]">Higiene Infantil</span>
+                        <h4 class="text-xl font-bold mt-4 mb-4 text-white group-hover:text-brand transition-colors">¿Cada cuánto lavar el coche?</h4>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Recomendamos una limpieza técnica cada 3 meses para evitar la acumulación de ácaros y restos de leche que generan moho.</p>
+                    </div>
 
-<div class="grid md:grid-cols-3 gap-6">
+                    <div class="group reveal">
+                        <div class="overflow-hidden rounded-3xl mb-8 border border-white/5">
+                            <img src="https://images.unsplash.com/photo-1544126592-807daf21565c" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" alt="Vapor">
+                        </div>
+                        <span class="text-brand font-black text-[9px] uppercase tracking-[0.3em]">Tecnología</span>
+                        <h4 class="text-xl font-bold mt-4 mb-4 text-white group-hover:text-brand transition-colors">Beneficios del Vapor Seco</h4>
+                        <p class="text-zinc-500 text-sm leading-relaxed italic">El vapor a 140°C desinfecta sin humedecer en exceso las fibras, permitiendo una entrega más rápida y libre de químicos.</p>
+                    </div>
 
-<div class="testimonial reveal">
-<p>"Increíble servicio, quedó como nuevo 🔥"</p>
-<span class="text-pink-500">⭐️⭐️⭐️⭐️⭐️ - Laura M</span>
-</div>
+                    <div class="group reveal">
+                        <div class="overflow-hidden rounded-3xl mb-8 border border-white/5">
+                            <img src="https://images.unsplash.com/photo-1471336199076-1bea7b365836" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" alt="Salud">
+                        </div>
+                        <span class="text-brand font-black text-[9px] uppercase tracking-[0.3em]">Alergias</span>
+                        <h4 class="text-xl font-bold mt-4 mb-4 text-white group-hover:text-brand transition-colors">Prevención de Dermatitis</h4>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Un coche limpio reduce drásticamente las reacciones alérgicas en la piel sensible de los recién nacidos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="testimonial reveal">
-<p>"Se nota la diferencia, súper recomendado"</p>
-<span class="text-pink-500">⭐️⭐️⭐️⭐️⭐️ - Andrés R</span>
-</div>
+        <section id="faq" class="section-padding">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-4xl font-black italic uppercase text-center mb-16">Preguntas <span class="text-brand">Frecuentes</span></h3>
+                
+                <div class="space-y-4">
+                    <div class="faq-item reveal">
+                        <h4 class="text-lg font-bold text-white mb-4 italic">¿Cuánto tiempo tarda el servicio?</h4>
+                        <p class="text-zinc-500 text-sm">Dependiendo del estado y tipo de coche, el proceso toma entre 24 a 48 horas hábiles para asegurar un secado perfecto.</p>
+                    </div>
+                    <div class="faq-item reveal">
+                        <h4 class="text-lg font-bold text-white mb-4 italic">¿Incluyen recogida a domicilio?</h4>
+                        <p class="text-zinc-500 text-sm">Sí, contamos con servicio de recogida y entrega en todo Medellín y área metropolitana (Sabaneta, Envigado, Bello, Itagüí).</p>
+                    </div>
+                    <div class="faq-item reveal">
+                        <h4 class="text-lg font-bold text-white mb-4 italic">¿Qué productos utilizan?</h4>
+                        <p class="text-zinc-500 text-sm italic">Usamos detergentes biodegradables, neutros y especializados que no dejan residuos tóxicos ni fragancias fuertes que afecten al bebé.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="testimonial reveal">
-<p>"Mi bebé ahora está mucho más seguro"</p>
-<span class="text-pink-500">⭐️⭐️⭐️⭐️⭐️ - Camila P</span>
-</div>
+        <section class="section-padding bg-zinc-950/50">
+            <div class="max-w-4xl mx-auto glass-card reveal">
+                <h3 class="text-xl font-black italic uppercase mb-8 border-b border-white/10 pb-4">Términos del Servicio</h3>
+                <div class="text-[11px] text-zinc-500 space-y-4 font-medium uppercase tracking-widest leading-loose">
+                    <p>• El servicio incluye limpieza profunda, higienización general y mantenimiento de llantas.</p>
+                    <p>• <span class="text-brand">Información Crítica:</span> No se incluyen reparaciones mecánicas ni cambio de rodamientos.</p>
+                    <p>• Todo producto se recibe con inspección previa y registro fotográfico obligatorio.</p>
+                    <p>• El cliente debe informar sobre <span class="text-white">ALERGIAS</span> o contacto con mascotas para aplicar el protocolo especial.</p>
+                    <p>• Los resultados en manchas antiguas o desteñidos por sol dependen del estado del tejido original.</p>
+                </div>
+            </div>
+        </section>
 
-</div>
-</div>
-</section>
+        <section class="section-padding relative overflow-hidden">
+            <div class="absolute inset-0 bg-brand/5 opacity-50"></div>
+            <div class="max-w-7xl mx-auto text-center relative z-10 reveal">
+                <h2 class="text-5xl md:text-8xl font-black italic uppercase tracking-tighter mb-12">¿Listo para una <br> <span class="text-brand">limpieza premium?</span></h2>
+                <a href="https://wa.me/573203480677" class="btn-premium scale-125">Agenda vía WhatsApp</a>
+            </div>
+        </section>
+    </main>
 
-<!-- SEO TEXTO -->
-<section class="py-20 px-6">
-<div class="max-w-4xl mx-auto text-gray-400 text-sm">
+    <footer class="py-24 border-t border-white/5 bg-black px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-16">
+            <div class="col-span-2">
+                <span class="text-4xl tecni-logo text-white">tecni<span class="text-brand">baby</span></span>
+                <p class="mt-6 text-zinc-500 text-sm max-w-xs font-light italic">Especialistas en la salud de tu bebé a través de la higiene técnica en Medellín. Tecnología UV-C y vapor seco.</p>
+                <div class="flex gap-6 mt-10">
+                    <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand transition-all text-xl"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand transition-all text-xl"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-black text-[10px] uppercase tracking-widest mb-8 text-zinc-400">Navegación</h4>
+                <ul class="space-y-4 text-zinc-600 text-xs font-bold uppercase tracking-widest">
+                    <li><a href="#inicio" class="hover:text-brand">Inicio</a></li>
+                    <li><a href="#proceso" class="hover:text-brand">Procesos</a></li>
+                    <li><a href="#blog" class="hover:text-brand">Salud</a></li>
+                    <li><a href="#nosotros" class="hover:text-brand">Nosotros</a></li>
+                </ul>
+            </div>
 
-<h2 class="text-2xl text-white font-black mb-6">
-Limpieza de coches y sillas de bebé en Medellín
-</h2>
+            <div>
+                <h4 class="font-black text-[10px] uppercase tracking-widest mb-8 text-zinc-400">Contacto</h4>
+                <ul class="space-y-4 text-zinc-600 text-xs font-bold italic tracking-widest">
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-brand"></i> Medellín, Antioquia</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-brand"></i> +57 320 348 0677</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-brand"></i> hola@tecnibaby.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto mt-20 pt-10 border-t border-white/5 text-center">
+            <p class="text-[8px] text-zinc-800 font-black tracking-[0.8em] uppercase italic">© 2026 tecnibaby | JOEX SYSTEMS | Medellín, Colombia</p>
+        </div>
+    </footer>
 
-<p>
-En tecnibaby ofrecemos servicio especializado de limpieza de coches de bebé en Medellín, eliminando bacterias, ácaros y olores con tecnología avanzada como vapor y desinfección UV-C.
-</p>
+    <a href="https://wa.me/573203480677" class="whatsapp-btn">
+        <i class="fa-brands fa-whatsapp text-white"></i>
+    </a>
 
-</div>
-</section>
+    <script>
+        window.addEventListener("load", () => {
+            gsap.registerPlugin(ScrollTrigger);
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/573203480677?text=Hola%20quiero%20información" class="whatsapp">
-<i class="fa-brands fa-whatsapp"></i>
-</a>
+            const tl = gsap.timeline();
 
-<script>
+            // Animación del Loader
+            tl.to("#progress-fill", { width: "100%", duration: 2, ease: "power2.inOut" })
+              .to("#scanner", { opacity: 1, top: "100%", duration: 2, ease: "power2.inOut" }, "-=2")
+              .to("#loader-text", { scale: 1.1, opacity: 1, duration: 0.5 })
+              .to("#main-loader", { 
+                  y: "-100%", 
+                  duration: 1.2, 
+                  ease: "expo.inOut",
+                  onComplete: () => {
+                      document.body.style.overflowY = "auto";
+                  }
+              })
+              .to("body", { opacity: 1, duration: 0.5 }, "-=0.5")
+              .to(".glass-header", { translateY: 0, duration: 0.8, ease: "power3.out" });
 
-window.addEventListener("load",()=>{
-const tl=gsap.timeline();
+            // Revelación de secciones
+            gsap.utils.toArray(".reveal").forEach(el => {
+                gsap.to(el, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out"
+                });
+            });
 
-tl.to("#logo",{opacity:1,scale:1})
-.to("#scan",{opacity:1},"-=.5")
-.to("#scan",{top:"100%"})
-.to("#main-loader",{y:"-100%"})
-.to("body",{overflow:"auto"});
+            // Efecto Scanner Hero
+            gsap.to("#heroScanner", {
+                scrollTrigger: {
+                    trigger: ".clean-box",
+                    start: "top 70%",
+                    end: "bottom 20%",
+                    scrub: 1
+                },
+                x: "100%"
+            });
 
-gsap.registerPlugin(ScrollTrigger);
+            // Lógica del Countdown (7200 segundos)
+            let time = 7200;
+            const timerEl = document.getElementById("countdown");
+            
+            function updateTimer() {
+                const hours = Math.floor(time / 3600);
+                const minutes = Math.floor((time % 3600) / 60);
+                const seconds = time % 60;
+                
+                timerEl.innerHTML = `${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+                
+                if (time > 0) {
+                    time--;
+                } else {
+                    time = 7200; // Reset para mantener el FOMO siempre activo
+                }
+            }
+            
+            setInterval(updateTimer, 1000);
+            updateTimer();
 
-gsap.utils.toArray(".reveal").forEach(el=>{
-gsap.to(el,{
-scrollTrigger:{trigger:el,start:"top 85%"},
-opacity:1,
-y:0
-});
-});
+            // Parallax en fondo opcional
+            gsap.to("body", {
+                scrollTrigger: {
+                    scrub: true
+                },
+                backgroundPosition: "50% 100%"
+            });
+        });
 
-gsap.to("#cleanEffect",{
-scrollTrigger:{
-trigger:"#cleanEffect",
-start:"top 80%",
-end:"bottom 20%",
-scrub:true
-},
-x:"100%"
-});
-
-});
-
-let time=7200;
-setInterval(()=>{
-let h=Math.floor(time/3600);
-let m=Math.floor((time%3600)/60);
-let s=time%60;
-document.getElementById("countdown").innerHTML=`${h}h ${m}m ${s}s`;
-time--;
-},1000);
-
-</script>
-
+        // Prevenir scroll durante carga
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 </html>
