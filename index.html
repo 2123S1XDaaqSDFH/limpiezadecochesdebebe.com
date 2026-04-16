@@ -113,17 +113,6 @@
             background: #0f0f0f;
         }
 
-        /* EFECTO ANTES/DESPUÉS SCANNER */
-        .clean-box {
-            position: relative; overflow: hidden; border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .clean-overlay {
-            position: absolute; inset: 0; background: rgba(0,0,0,0.85);
-            border-right: 3px solid var(--brand);
-            z-index: 2;
-        }
-
         @keyframes floating {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -139,7 +128,6 @@
         }
         .whatsapp-btn:hover { transform: scale(1.1) rotate(10deg); }
 
-        /* SECCIONES EXTENDIDAS CSS */
         .section-padding { padding: 120px 24px; }
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 24px 0; }
         
@@ -205,17 +193,21 @@
                 </div>
             </div>
 
-            <div class="flex justify-center my-10 reveal">
-                <blockquote class="instagram-media" 
-                    data-instgrm-permalink="https://www.instagram.com/reel/DSnHRDiEakL/" 
-                    data-instgrm-version="14" 
-                    style="background:#000; border:1px solid #db2777; border-radius:24px; box-shadow:0 0 25px rgba(219,39,119,0.2); margin:1px; max-width:540px; min-width:326px; padding:0; width:100%;">
-                    <div style="padding:16px;">
-                        <a href="https://www.instagram.com/reel/DSnHRDiEakL/" style="background:#000; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank">
-                           <p class="text-zinc-500 italic animate-pulse">Cargando video de tecnibaby...</p>
-                        </a>
-                    </div>
-                </blockquote>
+            <div class="relative group reveal">
+                <div class="absolute -inset-10 bg-transparent rounded-full opacity-0 pointer-events-none"></div>
+                
+                <div class="flex justify-center my-10 relative z-10">
+                    <blockquote class="instagram-media" 
+                        data-instgrm-permalink="https://www.instagram.com/reel/DSnHRDiEakL/" 
+                        data-instgrm-version="14" 
+                        style="background:#000; border:1px solid #db2777; border-radius:24px; box-shadow:0 0 25px rgba(219,39,119,0.2); margin:1px; max-width:540px; min-width:326px; padding:0; width:100%;">
+                        <div style="padding:16px;">
+                            <a href="https://www.instagram.com/reel/DSnHRDiEakL/" style="background:#000; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+                               <p class="text-zinc-500 italic animate-pulse">Cargando video de tecnibaby...</p>
+                            </a>
+                        </div>
+                    </blockquote>
+                </div>
             </div>
         </div>
     </section>
@@ -251,7 +243,6 @@
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-24 reveal">
                     <h3 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">Nuestro <span class="text-brand">Proceso en 4 ETAPAS</span></h3>
-                    <p class="text-zinc-500 uppercase tracking-[0.4em] text-[10px] font-bold"></p>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -387,11 +378,9 @@
                 <a href="https://www.instagram.com/tecnibaby/" target="_blank" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-pink-600 transition-all text-xl" title="Instagram">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
-
                 <a href="https://www.facebook.com/tecnibaby1/" target="_blank" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all text-xl" title="Facebook">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
-
                 <a href="https://www.youtube.com/@tecnibaby" target="_blank" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-red-600 transition-all text-xl" title="YouTube">
                     <i class="fa-brands fa-youtube"></i>
                 </a>
@@ -415,12 +404,10 @@
                     <i class="fa-solid fa-location-dot text-brand mt-1"></i> 
                     <span>Cra 51 B #95 91, Aranjuez, Medellín</span>
                 </li>
-
                 <li class="flex items-center gap-3">
                     <i class="fa-solid fa-phone text-brand"></i> 
                     +57 320 348 0677
                 </li>
-
                 <li class="flex items-center gap-3">
                     <i class="fa-solid fa-envelope text-brand"></i> 
                     tecnibaby@gmail.com
@@ -441,11 +428,8 @@
     <script>
         window.addEventListener("load", () => {
             gsap.registerPlugin(ScrollTrigger);
-
             const tl = gsap.timeline();
-
             gsap.set("body", { opacity: 1 });
-
             tl.to("#progress-fill", { width: "100%", duration: 2, ease: "power2.inOut" })
               .to("#scanner", { opacity: 1, top: "100%", duration: 2, ease: "power2.inOut" }, "-=2")
               .to("#main-loader", { 
