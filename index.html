@@ -210,13 +210,7 @@
                        En tecnibaby no solo limpiamos, eliminamos bacterias, ácaros y olores que pueden afectar la salud de tu bebé
                     </p>
 
-                    <div class="bg-zinc-900/80 border border-white/5 p-8 rounded-[2rem] inline-block shadow-2xl backdrop-blur-md">
-                        <div class="flex items-center gap-4 mb-3">
-                            <i class="fa-solid fa-bolt-lightning text-brand"></i>
-                            <p class="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Promoción</p>
-                        </div>
-                        <p id="countdown" class="text-4xl text-brand font-black italic tracking-tighter tabular-nums"></p>
-                    </div>
+                   
 
                     <div class="flex flex-wrap gap-6 pt-4">
                         <a href="https://wa.me/573203480677" class="btn-premium italic">Quiero el servicio</a>
@@ -483,26 +477,7 @@
                 x: "100%"
             });
 
-            // Lógica del Countdown (7200 segundos)
-            let time = 7200;
-            const timerEl = document.getElementById("countdown");
-            
-            function updateTimer() {
-                const hours = Math.floor(time / 3600);
-                const minutes = Math.floor((time % 3600) / 60);
-                const seconds = time % 60;
-                
-                timerEl.innerHTML = `${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
-                
-                if (time > 0) {
-                    time--;
-                } else {
-                    time = 7200; // Reset para mantener el FOMO siempre activo
-                }
-            }
-            
-            setInterval(updateTimer, 1000);
-            updateTimer();
+
 
             // Parallax en fondo opcional
             gsap.to("body", {
