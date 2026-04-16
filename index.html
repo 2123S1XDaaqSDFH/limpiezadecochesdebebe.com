@@ -48,12 +48,12 @@
 
         /* RESET & BASE */
         * { cursor: default; }
-        body { 
-            background-color: var(--bg-dark); 
-            color: #fff; 
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            overflow-y: hidden; /* Controlado por el Loader */
+    body { 
+    background-color: var(--bg-dark); 
+    color: #fff; 
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    /* Eliminamos el overflow-y hidden de aquí para evitar bloqueos permanentes */
         }
 
         /* TIPOGRAFÍA ESPECIAL */
@@ -459,70 +459,48 @@
         <i class="fa-brands fa-whatsapp text-white"></i>
     </a>
 
-    <script>
+  <script>
     window.addEventListener("load", () => {
-    gsap.registerPlugin(ScrollTrigger);
+        // 1. Registrar plugins de GSAP
+        gsap.registerPlugin(ScrollTrigger);
 
-    const tl = gsap.timeline();
+        const tl = gsap.timeline();
 
-    // 1. Forzamos a que el body sea visible pero el loader esté encima
-    gsap.set("body", { opacity: 1 });
+        // 2. Aseguramos que el body sea visible detrás del loader
+        gsap.set("body", { opacity: 1 });
 
-    // 2. Secuencia del Loader
-    tl.to("#progress-fill", { width: "100%", duration: 2, ease: "power2.inOut" })
-      .to("#scanner", { opacity: 1, top: "100%", duration: 2, ease: "power2.inOut" }, "-=2")
-      .to("#main-loader", { 
-          y: "-100%", 
-          duration: 1.2, 
-          ease: "expo.inOut",
-          onComplete: () => {
-              // Esto permite que el usuario pueda hacer scroll
-              document.body.style.overflowY = "auto";
-              document.getElementById("main-loader").style.display = "none";
-          }
-      })
-      .to(".glass-header", { translateY: 0, duration: 0.8, ease: "power3.out" }, "-=0.5");
+        // 3. Secuencia del Loader (Barra de progreso y salida)
+        tl.to("#progress-fill", { width: "100%", duration: 2, ease: "power2.inOut" })
+          .to("#scanner", { opacity: 1, top: "100%", duration: 2, ease: "power2.inOut" }, "-=2")
+          .to("#main-loader", { 
+              y: "-100%", 
+              duration: 1.2, 
+              ease: "expo.inOut",
+              onComplete: () => {
+                  // ESTO ES LO MÁS IMPORTANTE: Libera el scroll y oculta el div
+                  document.body.style.overflowY = "auto";
+                  document.getElementById("main-loader").style.display = "none";
+              }
+          })
+          .to(".glass-header", { translateY: 0, duration: 0.8, ease: "power3.out" }, "-=0.5");
 
-    // 3. Animación de las secciones al bajar
-    gsap.utils.toArray(".reveal").forEach(el => {
-        gsap.to(el, {
-            scrollTrigger: {
-                trigger: el,
-                start: "top 90%",
-                toggleActions: "play none none none"
-            },
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out"
-        });
-    });
-});
-
-// Reiniciar el scroll al inicio si se recarga
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-}
-              })
-              .to("body", { opacity: 1, duration: 0.5 }, "-=0.5")
-              .to(".glass-header", { translateY: 0, duration: 0.8, ease: "power3.out" });
-
-            // Revelación de secciones
-            gsap.utils.toArray(".reveal").forEach(el => {
-                gsap.to(el, {
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 90%",
-                        toggleActions: "play none none none"
-                    },
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.2,
-                    ease: "power3.out"
-                });
+        // 4. Animación de revelación para elementos con clase .reveal
+        gsap.utils.toArray(".reveal").forEach(el => {
+            gsap.to(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out"
             });
+        });
 
-            // Efecto Scanner Hero
+        // 5. Efecto de Scanner en la sección Hero (si existe)
+        if (document.querySelector("#heroScanner")) {
             gsap.to("#heroScanner", {
                 scrollTrigger: {
                     trigger: ".clean-box",
@@ -532,23 +510,14 @@ window.onbeforeunload = function () {
                 },
                 x: "100%"
             });
-
-
-
-            // Parallax en fondo opcional
-            gsap.to("body", {
-                scrollTrigger: {
-                    scrub: true
-                },
-                backgroundPosition: "50% 100%"
-            });
-        });
-
-        // Prevenir scroll durante carga
-        window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
         }
-    </script>
+    });
+
+    // Resetear el scroll al inicio al recargar la página
+    window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+    }
+</script>
     <script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
